@@ -5,17 +5,6 @@ class RegistroTarjetaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        leading: Icon(Icons.menu),
-        title: Text(''),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.account_circle),
-          ),
-        ],
-      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

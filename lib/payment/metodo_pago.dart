@@ -5,7 +5,7 @@ class MetodoPagoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         leading: Icon(Icons.menu),
         title: Text(''),
@@ -15,7 +15,7 @@ class MetodoPagoPage extends StatelessWidget {
             child: Icon(Icons.account_circle),
           ),
         ],
-      ),
+      ),*/
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
