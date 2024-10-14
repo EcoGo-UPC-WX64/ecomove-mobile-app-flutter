@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'booking_reservation/reserva.dart'; // Importa la pantalla de reserva
+import 'booking_reservation/alquilar_vehiculo.dart'; // Importa la nueva pantalla de alquilar vehículo
 
 void main() {
   runApp(MyApp());
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: ReservaPage(), 
+      // Cambia `home` a `AlquilarVehiculoPage` si deseas mostrar esa pantalla primero
+      home: AlquilarVehiculoPage(), 
     );
   }
 }
