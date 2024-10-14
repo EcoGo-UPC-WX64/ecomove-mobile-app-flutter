@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'booking_reservation/reserva.dart'; // Importa la pantalla de reserva
 
 void main() {
-  runApp(const MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Reserva de Vehículos',
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
       ),
+      home: ReservaPage(), 
     );
   }
 }
