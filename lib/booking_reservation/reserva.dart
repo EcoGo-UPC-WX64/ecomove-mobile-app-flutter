@@ -44,7 +44,6 @@ class _ReservaPageState extends State<ReservaPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Colocar "RESERVA" fuera del recuadro blanco
               const Text(
                 'RESERVA',
                 style: TextStyle(
@@ -77,7 +76,7 @@ class _ReservaPageState extends State<ReservaPage> {
                       decoration: InputDecoration(
                         labelText: 'Fecha inicio',
                         labelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta en estado normal
-                        floatingLabelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta cuando el campo está enfocado
+                        floatingLabelStyle: const TextStyle(color: Colors.black), 
                         suffixIcon: const Icon(Icons.calendar_today), // Icono predeterminado
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -98,7 +97,6 @@ class _ReservaPageState extends State<ReservaPage> {
                     ),
                     const SizedBox(height: 16),
                     
-                    // Campo de selección de fecha de fin con etiquetas en negro
                     TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
@@ -125,7 +123,6 @@ class _ReservaPageState extends State<ReservaPage> {
                     ),
                     const SizedBox(height: 16),
                     
-                    // Campo de texto para el distrito con etiquetas en negro
                     TextFormField(
                       controller: _distritoController,
                       decoration: InputDecoration(
@@ -145,9 +142,8 @@ class _ReservaPageState extends State<ReservaPage> {
                     ),
                     const SizedBox(height: 20),
 
-                    // Botón para comenzar la reserva más pequeño y redondeado
                     SizedBox(
-                      width: 180, // Hacemos el botón más pequeño
+                      width: 180, 
                       child: ElevatedButton(
                         onPressed: () {
                           debugPrint('Reserva confirmada');
