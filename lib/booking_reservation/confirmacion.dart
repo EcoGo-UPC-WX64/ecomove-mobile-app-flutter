@@ -6,7 +6,6 @@ class ConfirmacionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: const Color(0xFFE3F2FD), // Fondo azul claro
       body: Center(
         child: Padding(
@@ -38,6 +37,29 @@ class ConfirmacionPage extends StatelessWidget {
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40), 
+
+              // Botón para finalizar y volver al inicio
+              ElevatedButton(
+                onPressed: () {
+                  // Navegar de regreso a la página de inicio o reserva
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4F889E), // Color personalizado
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                  ),
+                ),
+                child: const Text(
+                  'Finalizar',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'booking_reservation/alquilar_vehiculo.dart'; // Importa la nueva pantalla de alquilar vehículo
-//import 'booking_reservation/reserva.dart'; // Importa la pantalla de reserva
-//import 'booking_reservation/confirmacion.dart';
-import 'booking_reservation/historial_viajes.dart';
+import 'booking_reservation/alquilar_vehiculo.dart'; 
+import 'booking_reservation/reserva.dart';
+import 'booking_reservation/confirmacion.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,10 +16,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      //home: AlquilarVehiculoPage(),
-      //home: ReservaPage(),
-      //home: ConfirmacionPage(),
-      home: HistorialViajesPage(),
+      // Definir rutas
+      initialRoute: '/',
+      routes: {
+        '/': (context) => ReservaPage(), // Página principal de reserva
+        '/alquilar': (context) => AlquilarVehiculoPage(), // Página de alquilar vehículo
+        '/confirmacion': (context) => ConfirmacionPage(), // Página de confirmación
+      },
     );
   }
 }

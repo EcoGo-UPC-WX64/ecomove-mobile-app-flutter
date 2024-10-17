@@ -33,7 +33,6 @@ class _ReservaPageState extends State<ReservaPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Color personalizado para los bordes y el botón
     const Color customColor = Color(0xFF4F889E);
 
     return Scaffold(
@@ -52,13 +51,11 @@ class _ReservaPageState extends State<ReservaPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              
-              // Relleno para el recuadro blanco
               Container(
                 padding: const EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
-                  color: Colors.white, // Fondo blanco para el formulario
-                  borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
@@ -70,21 +67,20 @@ class _ReservaPageState extends State<ReservaPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Campo de selección de fecha de inicio con etiquetas en negro
                     TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: 'Fecha inicio',
-                        labelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta en estado normal
-                        floatingLabelStyle: const TextStyle(color: Colors.black), 
-                        suffixIcon: const Icon(Icons.calendar_today), // Icono predeterminado
+                        labelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2), // Bordes con color personalizado
+                          borderSide: const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2), // Bordes con color personalizado al enfocar
+                          borderSide: const BorderSide(color: customColor, width: 2),
                         ),
                         contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
                       ),
@@ -101,16 +97,16 @@ class _ReservaPageState extends State<ReservaPage> {
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: 'Fecha fin',
-                        labelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta en estado normal
-                        floatingLabelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta cuando el campo está enfocado
-                        suffixIcon: const Icon(Icons.calendar_today), // Icono predeterminado
+                        labelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2), // Bordes con color personalizado
+                          borderSide: const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2), // Bordes con color personalizado al enfocar
+                          borderSide: const BorderSide(color: customColor, width: 2),
                         ),
                         contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
                       ),
@@ -127,15 +123,15 @@ class _ReservaPageState extends State<ReservaPage> {
                       controller: _distritoController,
                       decoration: InputDecoration(
                         labelText: 'Distrito',
-                        labelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta en estado normal
-                        floatingLabelStyle: const TextStyle(color: Colors.black), // Color de la etiqueta cuando el campo está enfocado
+                        labelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle: const TextStyle(color: Colors.black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2), // Bordes con color personalizado
+                          borderSide: const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2), // Bordes con color personalizado al enfocar
+                          borderSide: const BorderSide(color: customColor, width: 2),
                         ),
                         contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
                       ),
@@ -146,13 +142,14 @@ class _ReservaPageState extends State<ReservaPage> {
                       width: 180, 
                       child: ElevatedButton(
                         onPressed: () {
-                          debugPrint('Reserva confirmada');
+                          // Al presionar, navega a la pantalla de alquilar vehículo
+                          Navigator.pushNamed(context, '/alquilar');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: customColor, // Color personalizado para el botón
+                          backgroundColor: customColor,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30), // Bordes más redondeados
+                            borderRadius: BorderRadius.circular(30),
                           ),
                         ),
                         child: const Text(

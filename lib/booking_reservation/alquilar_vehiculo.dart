@@ -10,6 +10,7 @@ class AlquilarVehiculoPage extends StatefulWidget {
 class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
   String _codigo = "47273";
 
+  // Función para regenerar el código
   void _regenerarCodigo() {
     setState(() {
       _codigo = (int.parse(_codigo) + 1).toString();
@@ -20,7 +21,7 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE3F2FD), // Color de fondo claro
-      body: SafeArea( 
+      body: SafeArea(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -71,6 +72,29 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
                   ),
                   child: const Text(
                     'Volver a generar',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                
+                // Botón para navegar a la pantalla de confirmación
+                ElevatedButton(
+                  onPressed: () {
+                    // Navegar a la pantalla de confirmación
+                    Navigator.pushNamed(context, '/confirmacion');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4F889E), // Color personalizado
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                    ),
+                  ),
+                  child: const Text(
+                    'Confirmar y continuar',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
