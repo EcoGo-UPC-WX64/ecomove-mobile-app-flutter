@@ -17,3 +17,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - lib/assets/images/ic_reserva.png
+    - lib/assets/images/ic_logros.png
+    - lib/assets/images/ic_historial.png
+    - lib/assets/images/ic_blog.png
