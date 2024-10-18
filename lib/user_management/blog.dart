@@ -69,6 +69,7 @@ class BlogPage extends StatelessWidget {
 
   Widget _buildReviewCard(String name, String review, String imagePath) {
     return Card(
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
