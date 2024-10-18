@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/user_management/blog_confirmation.dart';
 import 'package:flutter/material.dart';
 import 'profile.dart';
 
@@ -91,6 +92,9 @@ class _BlogPostPageState extends State<BlogPostPage> {
               child: ElevatedButton(
                 onPressed: () {
                   // Acción para publicar el blog
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const BlogConfirmation()));
                   String title = _titleController.text;
                   String content = _contentController.text;
 
