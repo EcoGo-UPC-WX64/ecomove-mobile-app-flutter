@@ -12,8 +12,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
-
+      backgroundColor: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
       body: Center(
         child: Card(
           elevation: 4,

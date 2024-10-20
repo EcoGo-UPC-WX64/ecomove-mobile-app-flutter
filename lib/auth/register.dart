@@ -4,7 +4,12 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
+      backgroundColor: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFE6F4FB), // Color de fondo de la AppBar
+        elevation: 0, // Sin sombra bajo la AppBar
+        automaticallyImplyLeading: true,
+      ),
 
       body: Center(
         child: Card(
