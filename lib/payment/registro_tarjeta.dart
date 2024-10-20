@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import '../custom_returnAppBar.dart';
 import 'confirmacion_reserva.dart';
 
 class RegistroTarjetaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomReturnAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20.0),
@@ -18,7 +20,7 @@ class RegistroTarjetaPage extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -26,7 +28,7 @@ class RegistroTarjetaPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'DATOS DE LA TARJETA',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -34,7 +36,7 @@ class RegistroTarjetaPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Nro. de tarjeta',
@@ -44,7 +46,7 @@ class RegistroTarjetaPage extends StatelessWidget {
                   ),
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Fecha de vencimiento',
@@ -54,7 +56,7 @@ class RegistroTarjetaPage extends StatelessWidget {
                   ),
                   keyboardType: TextInputType.datetime,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'CVV',
@@ -65,20 +67,20 @@ class RegistroTarjetaPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   obscureText: true,
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ConfirmacionReservaPage()),
+                          builder: (context) => const ConfirmacionReservaPage()),
                     );
                   },
-                  child: Text('Pagar', style: TextStyle(color: Colors.white)),
+                  child: const Text('Pagar', style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey,
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    textStyle: TextStyle(fontSize: 18.0),
+                    backgroundColor: const Color(0xFF55889D),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    textStyle: const TextStyle(fontSize: 18.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),

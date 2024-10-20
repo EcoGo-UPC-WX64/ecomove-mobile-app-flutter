@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
 import 'registro_tarjeta.dart';
 
@@ -5,29 +6,19 @@ class MetodoPagoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        leading: Icon(Icons.menu),
-        title: Text(''),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.account_circle),
-          ),
-        ],
-      ),*/
+      appBar: const CustomReturnAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               'MÉTODO DE PAGO',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton.icon(
               onPressed: () {
                 Navigator.push(
@@ -36,37 +27,37 @@ class MetodoPagoPage extends StatelessWidget {
                       builder: (context) => RegistroTarjetaPage()),
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.credit_card,
                 color: Colors.white,
               ),
-              label: Text(
+              label: const Text(
                 'Tarjeta Visa',
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                textStyle: TextStyle(fontSize: 18.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                textStyle: const TextStyle(fontSize: 18.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
-              child: Text(
-                'Volver a reservas',
-                style: TextStyle(color: Colors.white, fontSize: 16.0),
-              ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueGrey,
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                textStyle: TextStyle(fontSize: 18.0),
+                backgroundColor: const Color(0xFF55889D),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                textStyle: const TextStyle(fontSize: 18.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
+              ),
+              child: const Text(
+                'Volver a reservas',
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
               ),
             ),
           ],

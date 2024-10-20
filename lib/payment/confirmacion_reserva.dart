@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ConfirmacionReservaPage extends StatelessWidget {
+  const ConfirmacionReservaPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,19 +12,19 @@ class ConfirmacionReservaPage extends StatelessWidget {
           children: [
             // Icono de check dentro de un círculo
             Container(
-              padding: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(20.0),
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.blueGrey,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.check_circle_outline,
                 size: 100.0,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 20.0),
-            Text(
+            const SizedBox(height: 20.0),
+            const Text(
               'Tu pago se ha realizado con éxito',
               style: TextStyle(fontSize: 18.0),
             ),
