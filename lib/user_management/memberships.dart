@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../custom_returnAppBar.dart';
 import 'profile.dart';
 
 class SuscripcionesPage extends StatelessWidget {
@@ -19,23 +20,7 @@ class SuscripcionesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF55889D), // Color de fondo de la AppBar
-        elevation: 0, // Sin sombra bajo la AppBar
-        automaticallyImplyLeading: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.account_circle, color: Colors.white),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: const CustomReturnAppBar(),
       body: Container(
         color: const Color(0xFFE6F4FB), // Color de fondo
         padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 16.0),

@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 
 class BlogConfirmation extends StatelessWidget {
@@ -43,8 +44,9 @@ class BlogConfirmation extends StatelessWidget {
               // Botón para finalizar y volver al inicio
               ElevatedButton(
                 onPressed: () {
-                  // Navegar de regreso a la página de inicio o reserva
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProfilePage()),);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4F889E), // Color personalizado

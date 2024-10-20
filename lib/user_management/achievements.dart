@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
 import 'profile.dart';
 
@@ -17,23 +18,7 @@ class MedallasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF55889D), // Color de fondo de la AppBar
-        elevation: 0, // Sin sombra bajo la AppBar
-        automaticallyImplyLeading: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.account_circle, color: Colors.white),
-            onPressed: () {
-              // Funcionalidad del botón de perfil
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),);
-            },
-          ),
-        ],
-      ),
+      appBar: const CustomReturnAppBar(),
       body: Container(
         color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
         padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 64.0),
