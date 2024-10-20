@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/custom_appBar.dart';
 import 'package:flutter/material.dart';
 
 class ReservaPage extends StatefulWidget {
@@ -37,6 +38,7 @@ class _ReservaPageState extends State<ReservaPage> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFE3F2FD),
+      appBar: const CustomAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
