@@ -63,7 +63,7 @@ class Login extends StatelessWidget {
                   onPressed: () {},
                   child: Text('Ingresar'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.cyan[800],
+                    backgroundColor: Color(0xFF4F889E),
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25), // Padding del botón
                     shape: RoundedRectangleBorder(

@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/auth/register_confirmation.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatelessWidget {
@@ -88,10 +89,13 @@ class Register extends StatelessWidget {
                 ),
                 SizedBox(height: 20), // Espacio adicional al final si deseas agregar más elementos
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterConfirmation()) ,
+                    );
+                  },
                   child: Text('Ingresar'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.cyan[800],
+                    backgroundColor: Color(0xFF4F889E),
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25), // Padding del botón
                     shape: RoundedRectangleBorder(
