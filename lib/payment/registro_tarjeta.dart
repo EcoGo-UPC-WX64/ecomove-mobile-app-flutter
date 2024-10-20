@@ -73,7 +73,7 @@ class RegistroTarjetaPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ConfirmacionReservaPage()),
+                          builder: (context) => const ConfirmacionPagoPage()),
                     );
                   },
                   child: const Text('Pagar', style: TextStyle(color: Colors.white)),
