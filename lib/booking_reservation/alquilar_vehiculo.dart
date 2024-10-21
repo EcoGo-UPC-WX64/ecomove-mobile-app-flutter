@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/api_service.dart'; // Importa el servicio API
 
 class AlquilarVehiculoPage extends StatefulWidget {
   const AlquilarVehiculoPage({super.key});
@@ -9,12 +10,35 @@ class AlquilarVehiculoPage extends StatefulWidget {
 
 class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
   String _codigo = "47273";
+  ApiService apiService = ApiService(); // Instancia del servicio API
 
   // Función para regenerar el código
   void _regenerarCodigo() {
     setState(() {
-      _codigo = (int.parse(_codigo) + 1).toString();
+      _codigo = (int.parse(_codigo) + 500).toString();
     });
+  }
+
+  // Función para crear la reserva y enviar a la API
+  void _confirmarReserva() async {
+    try {
+      Map<String, dynamic> bookingData = {
+        'vehicle': _codigo, // Suponiendo que 'vehicle' es el código generado
+      };
+      await apiService.createBooking(bookingData); // Llamada a la API para crear la reserva
+
+      // Pasar el código generado como argumento
+      Navigator.pushNamed(
+        context,
+        '/confirmacion',
+        arguments: _codigo, // Pasa el código como argumento
+      );
+    } catch (e) {
+      print('Error al crear la reserva: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al crear la reserva: ${e.toString()}')),
+      );
+    }
   }
 
   @override
@@ -80,12 +104,9 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
                 ),
                 const SizedBox(height: 20),
                 
-                // Botón para navegar a la pantalla de confirmación
+                // Botón para confirmar la reserva y continuar
                 ElevatedButton(
-                  onPressed: () {
-                    // Navegar a la pantalla de confirmación
-                    Navigator.pushNamed(context, '/confirmacion');
-                  },
+                  onPressed: _confirmarReserva, // Llama a la función que confirma la reserva
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E), // Color personalizado
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),

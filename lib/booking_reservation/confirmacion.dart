@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ConfirmacionPage extends StatelessWidget {
-  const ConfirmacionPage({super.key});
+  final String bookingCode; // Recibe el código de la reserva
+
+  const ConfirmacionPage({super.key, required this.bookingCode});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,17 @@ class ConfirmacionPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20), 
+
+              // Mostrar el código de la reserva
+              Text(
+                'Código de la reserva: $bookingCode',
+                style: const TextStyle(
+                  fontSize: 18,
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.center,

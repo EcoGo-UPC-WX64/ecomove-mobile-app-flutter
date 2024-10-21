@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/api_service.dart'; // Importa el servicio API
 
 class ReservaPage extends StatefulWidget {
   const ReservaPage({super.key});
@@ -11,6 +12,7 @@ class _ReservaPageState extends State<ReservaPage> {
   DateTime? _fechaInicio;
   DateTime? _fechaFin;
   final TextEditingController _distritoController = TextEditingController();
+  ApiService apiService = ApiService(); // Instancia del servicio API
 
   Future<void> _selectDate(BuildContext context, bool isFechaInicio) async {
     DateTime? picked = await showDatePicker(
@@ -28,6 +30,35 @@ class _ReservaPageState extends State<ReservaPage> {
           _fechaFin = picked;
         }
       });
+    }
+  }
+
+  // Función para crear la reserva
+  void _crearReserva() async {
+    if (_fechaInicio == null || _fechaFin == null || _distritoController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor, completa todos los campos')),
+      );
+      return;
+    }
+
+    try {
+      // Crear el objeto para enviar a la API
+      Map<String, dynamic> reservaData = {
+        'userId': 1, // Puedes cambiar este valor por el ID real del usuario
+        'vehicleId': 1, // Cambia este valor por el ID real del vehículo
+        'startTime': _fechaInicio!.toIso8601String(),
+        'endTime': _fechaFin!.toIso8601String(),
+        'status': 'active' // Puedes cambiar este estado según la lógica de tu aplicación
+      };
+
+      await apiService.createBooking(reservaData); // Llamada a la API
+      Navigator.pushNamed(context, '/alquilar'); // Navegar a alquilar vehículo si es exitosa
+    } catch (e) {
+      print('Error al crear la reserva: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al crear la reserva: ${e.toString()}')),
+      );
     }
   }
 
@@ -67,6 +98,7 @@ class _ReservaPageState extends State<ReservaPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Campo para seleccionar la fecha de inicio
                     TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
@@ -93,6 +125,7 @@ class _ReservaPageState extends State<ReservaPage> {
                     ),
                     const SizedBox(height: 16),
                     
+                    // Campo para seleccionar la fecha de fin
                     TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
@@ -119,6 +152,7 @@ class _ReservaPageState extends State<ReservaPage> {
                     ),
                     const SizedBox(height: 16),
                     
+                    // Campo de texto para el distrito
                     TextFormField(
                       controller: _distritoController,
                       decoration: InputDecoration(
@@ -138,13 +172,11 @@ class _ReservaPageState extends State<ReservaPage> {
                     ),
                     const SizedBox(height: 20),
 
+                    // Botón para comenzar la reserva
                     SizedBox(
                       width: 180, 
                       child: ElevatedButton(
-                        onPressed: () {
-                          // Al presionar, navega a la pantalla de alquilar vehículo
-                          Navigator.pushNamed(context, '/alquilar');
-                        },
+                        onPressed: _crearReserva, // Llamar a la función para crear la reserva
                         style: ElevatedButton.styleFrom(
                           backgroundColor: customColor,
                           padding: const EdgeInsets.symmetric(vertical: 12),
