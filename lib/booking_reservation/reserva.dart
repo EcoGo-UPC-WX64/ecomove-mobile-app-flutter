@@ -13,7 +13,7 @@ class _ReservaPageState extends State<ReservaPage> {
   DateTime? _fechaInicio;
   DateTime? _fechaFin;
   final TextEditingController _distritoController = TextEditingController();
-  ApiService apiService = ApiService(); // Instancia del servicio API
+  ApiService apiService = ApiService();
 
   Future<void> _selectDate(BuildContext context, bool isFechaInicio) async {
     DateTime? picked = await showDatePicker(
@@ -36,9 +36,10 @@ class _ReservaPageState extends State<ReservaPage> {
 
   // Función para crear la reserva
   void _crearReserva() async {
-    if (_fechaInicio == null || _fechaFin == null || _distritoController.text.isEmpty) {
+    if (_fechaInicio == null || _fechaFin == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, completa todos los campos')),
+        const SnackBar(
+            content: Text('Por favor, selecciona las fechas de inicio y fin')),
       );
       return;
     }
@@ -46,16 +47,18 @@ class _ReservaPageState extends State<ReservaPage> {
     try {
       // Crear el objeto para enviar a la API
       Map<String, dynamic> reservaData = {
-        'id': 1,
         'userId': 1,
-        'vehicleId': 1, 
+        'vehicleId': 1,
         'startTime': _fechaInicio!.toIso8601String(),
         'endTime': _fechaFin!.toIso8601String(),
-        'status': 'Activo' 
+        'status': "Activo",
       };
 
-      await apiService.createBooking(reservaData); 
-      Navigator.pushNamed(context, '/alquilar'); 
+      // Llamada al servicio de API para crear la reserva
+      await apiService.createBooking(reservaData);
+
+      // Navegar a la pantalla de éxito u otra
+      Navigator.pushNamed(context, '/alquilar');
     } catch (e) {
       print('Error al crear la reserva: $e');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -107,17 +110,21 @@ class _ReservaPageState extends State<ReservaPage> {
                       decoration: InputDecoration(
                         labelText: 'Fecha inicio',
                         labelStyle: const TextStyle(color: Colors.black),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 12.0),
                       ),
                       onTap: () => _selectDate(context, true),
                       controller: TextEditingController(
@@ -127,24 +134,28 @@ class _ReservaPageState extends State<ReservaPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Campo para seleccionar la fecha de fin
                     TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: 'Fecha fin',
                         labelStyle: const TextStyle(color: Colors.black),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 12.0),
                       ),
                       onTap: () => _selectDate(context, false),
                       controller: TextEditingController(
@@ -154,32 +165,37 @@ class _ReservaPageState extends State<ReservaPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Campo de texto para el distrito
                     TextFormField(
                       controller: _distritoController,
                       decoration: InputDecoration(
                         labelText: 'Distrito',
                         labelStyle: const TextStyle(color: Colors.black),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 12.0),
                       ),
                     ),
                     const SizedBox(height: 20),
 
                     // Botón para comenzar la reserva
                     SizedBox(
-                      width: 180, 
+                      width: 180,
                       child: ElevatedButton(
-                        onPressed: _crearReserva, // Llamar a la función para crear la reserva
+                        onPressed:
+                            _crearReserva, // Llamar a la función para crear la reserva
                         style: ElevatedButton.styleFrom(
                           backgroundColor: customColor,
                           padding: const EdgeInsets.symmetric(vertical: 12),
