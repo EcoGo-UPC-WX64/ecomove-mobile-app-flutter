@@ -46,15 +46,16 @@ class _ReservaPageState extends State<ReservaPage> {
     try {
       // Crear el objeto para enviar a la API
       Map<String, dynamic> reservaData = {
-        'userId': 1, // Puedes cambiar este valor por el ID real del usuario
-        'vehicleId': 1, // Cambia este valor por el ID real del vehículo
+        'id': 1,
+        'userId': 1,
+        'vehicleId': 1, 
         'startTime': _fechaInicio!.toIso8601String(),
         'endTime': _fechaFin!.toIso8601String(),
-        'status': 'active' // Puedes cambiar este estado según la lógica de tu aplicación
+        'status': 'Activo' 
       };
 
-      await apiService.createBooking(reservaData); // Llamada a la API
-      Navigator.pushNamed(context, '/alquilar'); // Navegar a alquilar vehículo si es exitosa
+      await apiService.createBooking(reservaData); 
+      Navigator.pushNamed(context, '/alquilar'); 
     } catch (e) {
       print('Error al crear la reserva: $e');
       ScaffoldMessenger.of(context).showSnackBar(
