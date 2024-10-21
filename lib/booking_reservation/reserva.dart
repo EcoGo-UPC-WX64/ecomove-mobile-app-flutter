@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/custom_appBar.dart';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart'; // Importa el servicio API
 
@@ -68,6 +69,7 @@ class _ReservaPageState extends State<ReservaPage> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFE3F2FD),
+      appBar: const CustomAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
