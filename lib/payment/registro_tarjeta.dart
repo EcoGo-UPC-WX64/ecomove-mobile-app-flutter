@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import '../custom_returnAppBar.dart';
 import 'confirmacion_reserva.dart';
 
 class RegistroTarjetaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomReturnAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
