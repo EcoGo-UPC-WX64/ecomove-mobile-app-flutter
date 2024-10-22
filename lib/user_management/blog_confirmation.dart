@@ -46,7 +46,7 @@ class BlogConfirmation extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ProfilePage()),);
+                    MaterialPageRoute(builder: (context) => ProfilePage()),);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4F889E), // Color personalizado

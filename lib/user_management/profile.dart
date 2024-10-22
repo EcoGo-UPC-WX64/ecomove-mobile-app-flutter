@@ -5,12 +5,22 @@ import 'blog.dart';
 import 'achievements.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+  // Definir un GlobalKey para controlar el Scaffold
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      key: _scaffoldKey,
+      appBar: CustomAppBar(
+        onMenuPressed: () {
+          // Lógica para abrir el menú
+          _scaffoldKey.currentState?.openDrawer();
+        },
+      ),
+      drawer: CustomAppBar.buildDrawer(context),
       body: Container(
         color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
           padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 64.0), // Espaciado general,
@@ -83,7 +93,7 @@ class ProfilePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BlogPage()),
+                            MaterialPageRoute(builder: (context) => const BlogPage()),
                         );
                       },
                     ),
