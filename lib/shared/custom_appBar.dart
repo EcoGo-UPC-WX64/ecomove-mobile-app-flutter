@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/booking_reservation/reserva.dart';
 import 'package:ecomove_flutter_mobile/user_management/memberships.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           _buildDrawerItem(
             context,
-            icon: Icons.directions_car,
+            icon: Icons.directions_bike,
             text: 'Vehículos',
             onTap: () {
               Navigator.pop(context); // Acción para "Vehículos"
@@ -84,11 +85,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             text: 'Reservar',
             onTap: () {
               Navigator.pop(context); // Acción para "Reservar"
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ReservaPage()), // Navega a la nueva página
+              );
             },
           ),
           _buildDrawerItem(
             context,
-            icon: Icons.car_repair,
+            icon: Icons.history_edu,
             text: 'Vehículos Registrados',
             onTap: () {
               Navigator.pop(context); // Acción para "Vehículos Registrados"

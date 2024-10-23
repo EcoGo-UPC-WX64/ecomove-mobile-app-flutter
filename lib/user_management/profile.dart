@@ -1,6 +1,7 @@
 import 'package:ecomove_flutter_mobile/shared/custom_appBar.dart';
 import 'package:flutter/material.dart';
 
+import '../booking_reservation/reserva.dart';
 import '../customer_support/alerta_seguridad.dart';
 import '../customer_support/soporte.dart';
 import 'blog.dart';
@@ -69,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                       iconPath: 'lib/assets/images/ic_reserva.png',
                       label: 'Reserva',
                       onPressed: () {
-                        // Add navigation to Reserva
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ReservaPage()));
                       },
                     ),
                     _buildMenuButton(
