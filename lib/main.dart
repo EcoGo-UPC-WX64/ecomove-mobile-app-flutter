@@ -1,21 +1,24 @@
-import 'package:ecomove_flutter_mobile/user_management/profile.dart';
+import 'package:ecomove_flutter_mobile/auth/login.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'EcoMove',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.blueGrey,
       ),
-      home: ProfilePage(),
+      home: Login(),
     );
   }
 }
+
