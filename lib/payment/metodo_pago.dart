@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/shared/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
 import 'registro_tarjeta.dart';
 
@@ -5,6 +6,7 @@ class MetodoPagoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomReturnAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

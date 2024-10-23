@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../shared/custom_returnAppBar.dart';
+
 class AlertaSeguridadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomReturnAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
+              const Center(
                 child: Text(
                   'ALERTAS',
                   style: TextStyle(
@@ -19,15 +22,15 @@ class AlertaSeguridadPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
                 'Avisos de seguridad',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,15 +42,15 @@ class AlertaSeguridadPage extends StatelessWidget {
                       'Antes de comenzar su viaje, asegúrese de que la bicicleta o el scooter estén en condiciones seguras de funcionamiento.'),
                 ],
               ),
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
                 'Consejos de uso de vehículos',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -73,11 +76,11 @@ class AlertaSeguridadPage extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("• ", style: TextStyle(fontSize: 16)),
+          const Text("• ", style: TextStyle(fontSize: 16)),
           Expanded(
             child: Text(
               text,
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
               textAlign: TextAlign.justify,
             ),
           ),

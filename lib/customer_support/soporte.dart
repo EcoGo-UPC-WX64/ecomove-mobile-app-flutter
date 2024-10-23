@@ -1,11 +1,15 @@
+import 'package:ecomove_flutter_mobile/shared/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
 
 class SoportePage extends StatelessWidget {
+  const SoportePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      appBar: const CustomReturnAppBar(),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

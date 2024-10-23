@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import '../custom_returnAppBar.dart';
-import 'profile.dart';
+import '../payment/metodo_pago.dart';
+import '../shared/custom_returnAppBar.dart';
 
 class SuscripcionesPage extends StatelessWidget {
-  // Lista de suscripciones
+  // Lista de suscripciones simulada
   final List<Map<String, String>> suscripciones = List.generate(
     3,
         (index) => {
       'titulo': 'Membresía Premium',
-      'descripcion': 'Tarifa mensual más alta con beneficios adicionales.',
+      'descripcion': 'Tarifa mensual con beneficios adicionales.',
       'detalles':
-      '• Acceso ilimitado a viajes al mes.\n• Tiempo de alquiler extendido por viaje.\n• Prioridad de acceso en zonas con alta demanda.',
+      '• Acceso ilimitado a viajes.\n• Tiempo extendido por viaje.\n• Prioridad en zonas con alta demanda.',
       'precio': 'S/39.90',
     },
   );
@@ -20,7 +20,7 @@ class SuscripcionesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomReturnAppBar(),
+      appBar: const CustomReturnAppBar(), // AppBar personalizado
       body: Container(
         color: const Color(0xFFE6F4FB), // Color de fondo
         padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 16.0),
@@ -45,6 +45,7 @@ class SuscripcionesPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final suscripcion = suscripciones[index];
                   return _buildSuscripcionCard(
+                    context, // Pasamos el contexto al widget de la tarjeta
                     suscripcion['titulo']!,
                     suscripcion['descripcion']!,
                     suscripcion['detalles']!,
@@ -59,19 +60,24 @@ class SuscripcionesPage extends StatelessWidget {
     );
   }
 
+  // Widget para construir la tarjeta de suscripción
   Widget _buildSuscripcionCard(
-      String titulo, String descripcion, String detalles, String precio) {
+      BuildContext context,
+      String titulo,
+      String descripcion,
+      String detalles,
+      String precio,
+      ) {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 12.0),
+      margin: const EdgeInsets.symmetric(vertical: 16.0),
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               titulo,
@@ -90,7 +96,10 @@ class SuscripcionesPage extends StatelessWidget {
             const SizedBox(height: 12.0),
             Text(
               detalles,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12.0),
@@ -102,17 +111,22 @@ class SuscripcionesPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.0),
+            // Botón de suscripción
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Acción para más información
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MetodoPagoPage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4F889E),
                   foregroundColor: Colors.white,
-                  // Color personalizado
                 ),
-                child: const Text('Más información'),
+                child: const Text('Suscribirme'),
               ),
             ),
           ],

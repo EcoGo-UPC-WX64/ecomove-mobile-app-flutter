@@ -1,6 +1,8 @@
-import 'package:ecomove_flutter_mobile/custom_appBar.dart';
+import 'package:ecomove_flutter_mobile/shared/custom_appBar.dart';
 import 'package:flutter/material.dart';
 
+import '../customer_support/alerta_seguridad.dart';
+import '../customer_support/soporte.dart';
 import 'blog.dart';
 import 'achievements.dart';
 
@@ -106,7 +108,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Add Support action
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SoportePage()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4F889E),
@@ -118,7 +120,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Add Alerts action
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AlertaSeguridadPage()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4F889E),

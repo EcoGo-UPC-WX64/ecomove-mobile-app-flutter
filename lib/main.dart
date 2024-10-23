@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,12 +10,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      title: 'EcoMove',
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey,
       ),
+      home: ProfilePage(),
     );
   }
 }

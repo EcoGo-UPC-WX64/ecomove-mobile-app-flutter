@@ -1,6 +1,6 @@
 import 'package:ecomove_flutter_mobile/user_management/blog_confirmation.dart';
 import 'package:flutter/material.dart';
-import '../custom_returnAppBar.dart';
+import '../shared/custom_returnAppBar.dart';
 import 'profile.dart';
 
 class BlogPostPage extends StatefulWidget {

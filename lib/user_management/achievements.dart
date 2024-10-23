@@ -1,5 +1,5 @@
-import 'package:ecomove_flutter_mobile/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
+import '../shared/custom_returnAppBar.dart';
 import 'profile.dart';
 
 class MedallasPage extends StatelessWidget {
