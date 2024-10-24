@@ -1,23 +1,25 @@
 import 'package:ecomove_flutter_mobile/auth/login.dart';
 import 'package:ecomove_flutter_mobile/shared/custom_appBar.dart';
 import 'package:flutter/material.dart';
-
 import '../booking_reservation/reserva.dart';
 import '../customer_support/alerta_seguridad.dart';
 import '../customer_support/soporte.dart';
 import 'blog.dart';
 import 'achievements.dart';
 
-class ProfilePage extends StatelessWidget {
-  final String? username; // Variable para almacenar el nombre de usuario
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
 
-  ProfilePage({super.key, required this.username});
+class ProfilePage extends StatelessWidget {
+
+  ProfilePage({super.key});
 
   // Definir un GlobalKey para controlar el Scaffold
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    final username = Provider.of<UserProvider>(context).username;
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBar(

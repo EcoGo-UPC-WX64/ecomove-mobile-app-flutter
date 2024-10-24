@@ -2,6 +2,8 @@ import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import '/services/api_service.dart';
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -29,9 +31,13 @@ class _LoginState extends State<Login> {
       final response = await apiService.login(loginData);
       print('Login exitoso: $response');
 
+      // Guardar el username en el UserProvider
+      Provider.of<UserProvider>(context, listen: false)
+          .setUsername(nameController.text);
+
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context)=>ProfilePage(username: nameController.text))
+          MaterialPageRoute(builder: (context)=>ProfilePage())
       );
 
     } catch (e) {
