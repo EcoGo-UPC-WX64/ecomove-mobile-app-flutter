@@ -1,5 +1,7 @@
 import 'package:ecomove_flutter_mobile/booking_reservation/reserva.dart';
 import 'package:ecomove_flutter_mobile/user_management/memberships.dart';
+import 'package:ecomove_flutter_mobile/user_management/profile.dart';
+import 'package:ecomove_flutter_mobile/vehicle_management/vehicle_list.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -26,7 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.account_circle, color: Colors.white),
           onPressed: () {
-            // Funcionalidad del botón de perfil
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
           },
         ),
       ],
@@ -76,7 +78,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: Icons.directions_bike,
             text: 'Vehículos',
             onTap: () {
-              Navigator.pop(context); // Acción para "Vehículos"
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => VehicleList()), // Navega a la nueva página
+              );
             },
           ),
           _buildDrawerItem(
