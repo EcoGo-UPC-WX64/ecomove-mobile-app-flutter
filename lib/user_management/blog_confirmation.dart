@@ -44,9 +44,7 @@ class BlogConfirmation extends StatelessWidget {
               // Botón para finalizar y volver al inicio
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()),);
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4F889E), // Color personalizado

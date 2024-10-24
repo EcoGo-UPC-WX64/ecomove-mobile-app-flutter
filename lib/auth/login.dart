@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import '/services/api_service.dart';
@@ -27,13 +28,12 @@ class _LoginState extends State<Login> {
     try {
       final response = await apiService.login(loginData);
       print('Login exitoso: $response');
-      // Redirigir al usuario a otra pantalla después de un login exitoso
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //     // builder: (context) => Home(),
-      //   ),
-      // );
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context)=>ProfilePage(username: nameController.text))
+      );
+
     } catch (e) {
       print('Error en login: $e');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -44,6 +44,8 @@ class _LoginState extends State<Login> {
         isLoading = false;  // Ocultar indicador de carga
       });
     }
+
+
   }
 
   @override

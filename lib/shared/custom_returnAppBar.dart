@@ -2,6 +2,8 @@ import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomReturnAppBar extends StatelessWidget implements PreferredSizeWidget {
+   // Recibir el nombre de usuario
+
   const CustomReturnAppBar({super.key});
 
   @override
@@ -11,19 +13,10 @@ class CustomReturnAppBar extends StatelessWidget implements PreferredSizeWidget 
       elevation: 0, // Sin sombra bajo la AppBar
       automaticallyImplyLeading: true,
       iconTheme: const IconThemeData(color: Colors.white),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.account_circle, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),);
-          },
-        ),
-      ],
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+
