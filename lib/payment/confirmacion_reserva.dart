@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../user_management/profile.dart';
+
 class ConfirmacionPagoPage extends StatelessWidget {
   const ConfirmacionPagoPage({super.key});
 
@@ -43,14 +45,17 @@ class ConfirmacionPagoPage extends StatelessWidget {
               // Botón para finalizar y volver al inicio
               ElevatedButton(
                 onPressed: () {
-                  // Navegar de regreso a la página de inicio o reserva
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4F889E), // Color personalizado
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                  backgroundColor:
+                      const Color(0xFF4F889E), // Color personalizado
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                    borderRadius:
+                        BorderRadius.circular(30), // Bordes redondeados
                   ),
                 ),
                 child: const Text(

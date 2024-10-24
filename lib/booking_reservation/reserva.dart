@@ -50,8 +50,8 @@ class _ReservaPageState extends State<ReservaPage> {
       Map<String, dynamic> reservaData = {
         'userId': 1,
         'vehicleId': 1,
-        'startTime': _fechaInicio!.toIso8601String(),
-        'endTime': _fechaFin!.toIso8601String(),
+        'startTime': _fechaInicio?.toIso8601String(),
+        'endTime': _fechaFin?.toIso8601String(),
         'status': "Activo",
       };
 

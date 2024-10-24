@@ -36,10 +36,7 @@ class _LoginState extends State<Login> {
           .setUsername(nameController.text);
 
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context)=>ProfilePage())
-      );
-
+          context, MaterialPageRoute(builder: (context) => ProfilePage()));
     } catch (e) {
       print('Error en login: $e');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -47,11 +44,9 @@ class _LoginState extends State<Login> {
       );
     } finally {
       setState(() {
-        isLoading = false;  // Ocultar indicador de carga
+        isLoading = false; // Ocultar indicador de carga
       });
     }
-
-
   }
 
   @override
@@ -116,20 +111,20 @@ class _LoginState extends State<Login> {
                 isLoading
                     ? CircularProgressIndicator() // Indicador de carga
                     : ElevatedButton(
-                  onPressed: _login, // Ejecutar el login
-                  child: Text('Ingresar'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.cyan[800],
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 15,
-                      horizontal: 25,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                ),
+                        onPressed: _login, // Ejecutar el login
+                        child: Text('Ingresar'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.cyan[800],
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: 25,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
