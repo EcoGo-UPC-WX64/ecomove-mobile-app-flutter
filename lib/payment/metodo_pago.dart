@@ -1,4 +1,5 @@
 import 'package:ecomove_flutter_mobile/shared/custom_returnAppBar.dart';
+import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 import 'registro_tarjeta.dart';
 
@@ -46,7 +47,10 @@ class MetodoPagoPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF55889D),
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
