@@ -1,7 +1,7 @@
 import 'package:ecomove_flutter_mobile/shared/custom_appBar.dart';
 import 'package:ecomove_flutter_mobile/shared/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
-import '../services/api_service_v2.dart'; // Importa el servicio API
+import '../services/api_service.dart'; // Importa el servicio API
 
 class ReservaPage extends StatefulWidget {
   const ReservaPage({super.key});

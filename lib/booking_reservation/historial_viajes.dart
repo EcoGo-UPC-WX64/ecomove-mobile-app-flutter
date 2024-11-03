@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/api_service_v2.dart'; // Importa el servicio API
+import '../services/api_service.dart'; // Importa el servicio API
 
 class HistorialViajesPage extends StatefulWidget {
   const HistorialViajesPage({super.key});
