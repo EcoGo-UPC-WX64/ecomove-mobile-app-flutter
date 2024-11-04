@@ -3,6 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class ApiService with ChangeNotifier {
+  static final ApiService _instance = ApiService._internal();
+
+  factory ApiService() {
+    return _instance;
+  }
+
+  ApiService._internal();
+
   final String baseUrl = "https://ecomove-api.azurewebsites.net/api/v1";
 
   String? _auth;
