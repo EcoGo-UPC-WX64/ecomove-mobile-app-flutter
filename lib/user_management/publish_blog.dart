@@ -1,7 +1,7 @@
+import 'package:ecomove_flutter_mobile/services/api_service.dart';
 import 'package:ecomove_flutter_mobile/user_management/blog_confirmation.dart';
 import 'package:flutter/material.dart';
 import '../shared/custom_returnAppBar.dart';
-import 'profile.dart';
 
 class BlogPostPage extends StatefulWidget {
   const BlogPostPage({super.key});
@@ -11,9 +11,40 @@ class BlogPostPage extends StatefulWidget {
 }
 
 class _BlogPostPageState extends State<BlogPostPage> {
-  // Controladores para obtenr los valores de los campos de texto
   final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _contentController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final ApiService apiService = ApiService();
+
+  Future<void> _publishBlog() async {
+    String title = _titleController.text;
+    String description = _descriptionController.text;
+
+    if (title.isEmpty || description.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Completa todos los campos')),
+      );
+      return;
+    }
+
+    final blogData = {
+      'title': title,
+      'description': description,
+      'userId': apiService.userId,
+    };
+
+    try {
+      await apiService.postBlogs(blogData); // Publica el blog en la API
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const BlogConfirmation()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al publicar el blog: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +66,7 @@ class _BlogPostPageState extends State<BlogPostPage> {
             ),
             const SizedBox(height: 64),
             const Text(
-              'Titulo del blog:',
+              'Título del blog:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -44,13 +75,12 @@ class _BlogPostPageState extends State<BlogPostPage> {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  borderSide: BorderSide.none
+                  borderSide: BorderSide.none,
                 ),
                 hintText: 'Ingresa el título',
                 filled: true,
                 fillColor: Colors.white,
               ),
-
             ),
             const SizedBox(height: 30),
             const Text(
@@ -59,8 +89,8 @@ class _BlogPostPageState extends State<BlogPostPage> {
             ),
             const SizedBox(height: 8),
             TextFormField(
-              controller: _contentController,
-              maxLines: 5, // El área de texto más grande para el contenido
+              controller: _descriptionController,
+              maxLines: 5, // Área de texto más grande para el contenido
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
@@ -74,20 +104,10 @@ class _BlogPostPageState extends State<BlogPostPage> {
             const SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  // Acción para publicar el blog
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const BlogConfirmation()));
-                  String title = _titleController.text;
-                  String content = _contentController.text;
-
-                  // Manejar la publicación del blog, enviarlo a un servidor, etc.
-                  print('Título: $title');
-                  print('Contenido: $content');
-                },
+                onPressed: _publishBlog, // Llama al método para publicar
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   backgroundColor: const Color(0xFF4F889E),
                   foregroundColor: Colors.white,
                 ),
@@ -101,5 +121,12 @@ class _BlogPostPageState extends State<BlogPostPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
 }
