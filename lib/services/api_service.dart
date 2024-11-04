@@ -1,13 +1,16 @@
+// Archivo: lib/services/api_service.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
-class ApiService {
+class ApiService with ChangeNotifier {
   final String baseUrl = "https://ecomove-api.azurewebsites.net/api/v1";
-  String? _auth;
-  int? _userId;
 
+  int _userId = 3;
+  String _auth = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzExMjA0NjUsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW1lcyIsImlhdCI6MTczMDUxNTY2NSwibmJmIjoxNzMwNTE1NjY1fQ.XUa0WogCOUqxmUNIBZLHQNqMU2gLRCbDW5Vea7iW3R0';
+
+  // Getter para el token de autenticación
   String? get auth => _auth;
-
   int? get userId => _userId;
 
   // Método para realizar una solicitud GET con el token de autorización
@@ -21,8 +24,7 @@ class ApiService {
   }
 
   // Método para realizar una solicitud POST con el token de autorización
-  Future<http.Response> _postRequest(String endpoint,
-      Map<String, dynamic> data) async {
+  Future<http.Response> _postRequest(String endpoint, Map<String, dynamic> data) async {
     return await http.post(
       Uri.parse('$baseUrl$endpoint'),
       headers: <String, String>{
@@ -48,8 +50,9 @@ class ApiService {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final responseData = json.decode(response.body);
-      _auth = responseData['token'];
-      _userId = responseData['userId'];
+      _auth = responseData['token']; // Guardar el token
+      _userId = responseData['userId']; // Guardar el ID del usuario
+      notifyListeners(); // Notificar a los widgets que el estado ha cambiado
       return responseData;
     } else {
       throw Exception(
@@ -74,73 +77,7 @@ class ApiService {
       return json.decode(response.body);
     } else {
       throw Exception(
-          'Error al registrar el usuario: ${response.statusCode} - ${response
-              .body}');
-    }
-  }
-
-  // Método para crear una reserva
-  Future<dynamic> createBooking(Map<String, dynamic> bookingData) async {
-    try {
-      final response = await _postRequest('/bookings', bookingData);
-
-      if (response.statusCode == 201) {
-        return json.decode(response.body);
-      } else {
-        throw Exception(
-            'Error al crear la reserva: ${response.statusCode} - ${response
-                .body}');
-      }
-    } catch (error) {
-      throw Exception('Error al conectar con el servidor: $error');
-    }
-  }
-
-  // Método para obtener todas las reservas
-  Future<List<dynamic>> getAllBookings() async {
-    final response = await _getRequest('/bookings');
-
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception(
-          'Error al obtener las reservas: ${response.statusCode} - ${response
-              .body}');
-    }
-  }
-
-  // Método para obtener una reserva por su ID
-  Future<dynamic> getBookingById(int id) async {
-    final response = await _getRequest('/bookings/$id');
-
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception(
-          'Error al obtener la reserva por ID: ${response
-              .statusCode} - ${response.body}');
-    }
-  }
-
-  // Método para obtener reservas por ID de usuario
-  Future<List<dynamic>> getBookingsByUserId(int userId) async {
-    final response = await _getRequest('/bookings/user-id/$userId');
-
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception(
-          'Error al obtener las reservas por usuario: ${response
-              .statusCode} - ${response.body}');
+          'Error al registrar el usuario: ${response.statusCode} - ${response.body}');
     }
   }
 
@@ -159,8 +96,39 @@ class ApiService {
       return json.decode(response.body);
     } else {
       throw Exception(
-          'Error al obtener los vehículos por userId: ${response
-              .statusCode} - ${response.body}');
+          'Error al obtener los vehículos por userId: ${response.statusCode} - ${response.body}');
     }
   }
+
+  //Metodo para obtener la lista de vehículos
+  Future<List<Map<String, dynamic>>> getVehicles() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/eco-vehicles'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        if (auth != null) 'Authorization': 'Bearer $auth',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      return data.map((vehicle) => vehicle as Map<String, dynamic>).toList();
+    } else {
+      throw Exception('Error al obtener la lista de vehículos: ${response.statusCode} - ${response.body}');
+    }
+  }
+
+  // Método para crear una reserva
+  Future<void> createBooking(Map<String, dynamic> bookingData) async {
+    final response = await _postRequest('/bookings', bookingData);
+
+    print('Status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (response.statusCode != 201 && response.statusCode != 200) {
+      throw Exception('Error al crear la reserva: ${response.statusCode} - ${response.body}');
+    }
+  }
+
+
 }

@@ -90,10 +90,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             text: 'Reservar',
             onTap: () {
               Navigator.pop(context); // Acción para "Reservar"
-              Navigator.push(
+              /*Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ReservaPage()), // Navega a la nueva página
-              );
+              );*/
             },
           ),
           _buildDrawerItem(

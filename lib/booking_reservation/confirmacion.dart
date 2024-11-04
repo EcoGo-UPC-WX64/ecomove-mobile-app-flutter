@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../vehicle_management/vehicle_list.dart';
+
 class ConfirmacionPage extends StatelessWidget {
   final String bookingCode; // Recibe el código de la reserva
 
@@ -28,7 +30,7 @@ class ConfirmacionPage extends StatelessWidget {
                   size: 150, // Tamaño del icono
                 ),
               ),
-              const SizedBox(height: 40), 
+              const SizedBox(height: 40),
 
               // Texto de confirmación
               const Text(
@@ -40,7 +42,7 @@ class ConfirmacionPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20), 
+              const SizedBox(height: 20),
 
               // Mostrar el código de la reserva
               Text(
@@ -51,13 +53,13 @@ class ConfirmacionPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 40), 
+              const SizedBox(height: 40),
 
               // Botón para finalizar y volver al inicio
               ElevatedButton(
                 onPressed: () {
                   // Navegar de regreso a la página de inicio o reserva
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleList()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4F889E), // Color personalizado

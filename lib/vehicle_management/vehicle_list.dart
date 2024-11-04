@@ -1,21 +1,16 @@
-import 'package:ecomove_flutter_mobile/booking_reservation/reserva.dart';
+import 'package:ecomove_flutter_mobile/services/api_service.dart';
 import 'package:ecomove_flutter_mobile/vehicle_management/nearby_vehicles.dart';
 import 'package:flutter/material.dart';
 
+import '../booking_reservation/reserva.dart';
 import '../shared/custom_appBar.dart';
 import 'available_vehicles.dart';
 
 class VehicleList extends StatelessWidget {
   VehicleList({super.key});
 
+  final ApiService apiService = ApiService(); // Instancia de ApiService
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final List<Map<String, dynamic>> vehiculos = [
-    {'nombre': 'Scooter 1', 'imagen': 'lib/assets/images/Media.png'},
-    {'nombre': 'Bicicleta 1', 'imagen': 'lib/assets/images/Media.png'},
-    {'nombre': 'Scooter 2', 'imagen': 'lib/assets/images/Media.png'},
-    {'nombre': 'Bicicleta 2', 'imagen': 'lib/assets/images/Media.png'},
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -49,31 +44,47 @@ class VehicleList extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            // Carga los datos de los vehículos usando FutureBuilder
             Expanded(
-              child: GridView.builder(
-                itemCount: vehiculos.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16.0,
-                  mainAxisSpacing: 16.0,
-                ),
-                itemBuilder: (context, index) {
-                  final vehiculo = vehiculos[index];
-                  return GestureDetector(
-                    onTap: () {
-                      // Navegar a la página de detalles del vehículo
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ReservaPage(),
-                        ),
-                      );
-                    },
-                    child: _buildVehiculoCard(
-                      vehiculo['nombre'],
-                      vehiculo['imagen'],
-                    ),
-                  );
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: apiService.getVehicles(), // Llama al método de API
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(
+                        child: Text('No se encontraron vehículos.'));
+                  } else {
+                    final vehiculos = snapshot.data!;
+                    return GridView.builder(
+                      itemCount: vehiculos.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Dos columnas
+                        crossAxisSpacing: 16.0, // Espacio horizontal
+                        mainAxisSpacing: 16.0, // Espacio vertical
+                      ),
+                      itemBuilder: (context, index) {
+                        final vehiculo = vehiculos[index];
+                        return GestureDetector(
+                          onTap: () {
+                            // Navegar a ReservaPage y pasar el vehicleId
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ReservaPage(vehicleId: vehiculo['id']),
+                              ),
+                            );
+                          },
+                          child: _buildVehiculoCard(
+                            vehiculo['model'] ?? 'Vehículo',
+                            vehiculo['imageUrl'] ?? 'lib/assets/images/placeholder.png',
+                          ),
+                        );
+                      },
+                    );
+                  }
                 },
               ),
             ),
@@ -96,7 +107,7 @@ class VehicleList extends StatelessWidget {
               child: const Text('Ver vehículos cercanos'),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
+            /*ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4F889E),
                 foregroundColor: Colors.white,
@@ -112,7 +123,7 @@ class VehicleList extends StatelessWidget {
                 );
               },
               child: const Text('Vehículos disponibles'),
-            ),
+            ),*/
             const SizedBox(height: 20),
           ],
         ),
@@ -120,30 +131,42 @@ class VehicleList extends StatelessWidget {
     );
   }
 
-  Widget _buildVehiculoCard(String nombre, String imagePath) {
+  Widget _buildVehiculoCard(String nombre, String imageUrl) {
     return Card(
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
       elevation: 5,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imagePath,
-            height: 100,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            nombre,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+      child: SizedBox(
+        height: 100, // Ajusta la altura aquí
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(
+              imageUrl,
+              height: 100,
+              width: 100,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'lib/assets/images/placeholder.png', // Imagen de reemplazo
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                );
+              },
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            Text(
+              nombre,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
