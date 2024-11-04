@@ -31,7 +31,7 @@ class BlogConfirmation extends StatelessWidget {
 
               // Texto de confirmación
               const Text(
-                'Tu plubliacación se ha subido correctamente',
+                'Tu publicación se ha subido correctamente',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
