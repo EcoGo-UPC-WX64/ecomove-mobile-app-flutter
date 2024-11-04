@@ -22,9 +22,9 @@ class _HistorialViajesPageState extends State<HistorialViajesPage> {
   // Función para obtener el historial de viajes desde la API
   void fetchHistorialViajes() async {
     try {
-      final data = await apiService.getAllBookings(); // Llamada a la API
+      //final data = await apiService.getAllBookings(); // Llamada a la API
       setState(() {
-        viajes = data;
+        //viajes = data;
         isLoading = false; // Cambia el estado cuando los datos sean recibidos
       });
     } catch (e) {

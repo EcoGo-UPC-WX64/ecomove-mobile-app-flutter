@@ -75,10 +75,10 @@ class ProfilePage extends StatelessWidget {
                 mainAxisSpacing: 36.0,
                 children: [
                   _buildMenuButton(
-                    iconPath: 'lib/assets/images/ic_reserva.png',
-                    label: 'Reserva',
+                    iconPath: 'lib/assets/images/ic_add.png',
+                    label: 'Registrar Vehículos',
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ReservaPage()));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const ReservaPage()));
                     },
                   ),
                   _buildMenuButton(
