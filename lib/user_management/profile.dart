@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 
 class ProfilePage extends StatelessWidget {
-
   ProfilePage({super.key});
 
   // Definir un GlobalKey para controlar el Scaffold
@@ -31,7 +30,8 @@ class ProfilePage extends StatelessWidget {
       drawer: CustomAppBar.buildDrawer(context),
       body: Container(
         color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
-        padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 64.0), // Espaciado
+        padding: const EdgeInsets.symmetric(
+            horizontal: 36.0, vertical: 64.0), // Espaciado
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -48,7 +48,10 @@ class ProfilePage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 // Lógica para cerrar sesión
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>Login())); // Volver al login
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Login())); // Volver al login
               },
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +88,10 @@ class ProfilePage extends StatelessWidget {
                     iconPath: 'lib/assets/images/ic_logros.png',
                     label: 'Logros',
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MedallasPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MedallasPage()));
                     },
                   ),
                   _buildMenuButton(
@@ -99,7 +105,8 @@ class ProfilePage extends StatelessWidget {
                     iconPath: 'lib/assets/images/ic_blog.png',
                     label: 'Blog',
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BlogPage()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => BlogPage()));
                     },
                   ),
                 ],
@@ -112,7 +119,10 @@ class ProfilePage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SoportePage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SoportePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E),
@@ -122,7 +132,10 @@ class ProfilePage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AlertaSeguridadPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AlertaSeguridadPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E),

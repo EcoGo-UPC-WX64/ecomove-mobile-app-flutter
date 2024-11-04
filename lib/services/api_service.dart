@@ -7,7 +7,8 @@ class ApiService with ChangeNotifier {
   final String baseUrl = "https://ecomove-api.azurewebsites.net/api/v1";
 
   int _userId = 3;
-  String _auth = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzExMjA0NjUsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW1lcyIsImlhdCI6MTczMDUxNTY2NSwibmJmIjoxNzMwNTE1NjY1fQ.XUa0WogCOUqxmUNIBZLHQNqMU2gLRCbDW5Vea7iW3R0';
+  String _auth =
+      'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzExMjA0NjUsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW1lcyIsImlhdCI6MTczMDUxNTY2NSwibmJmIjoxNzMwNTE1NjY1fQ.XUa0WogCOUqxmUNIBZLHQNqMU2gLRCbDW5Vea7iW3R0';
 
   // Getter para el token de autenticación
   String? get auth => _auth;
@@ -24,12 +25,14 @@ class ApiService with ChangeNotifier {
   }
 
   // Método para realizar una solicitud POST con el token de autorización
-  Future<http.Response> _postRequest(String endpoint, Map<String, dynamic> data) async {
+  Future<http.Response> _postRequest(
+      String endpoint, Map<String, dynamic> data) async {
     return await http.post(
       Uri.parse('$baseUrl$endpoint'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $auth', // Token de autorización
+        if (_auth != null)
+          'Authorization': 'Bearer $_auth', // Token de autorización
       },
       body: jsonEncode(data),
     );
@@ -114,7 +117,8 @@ class ApiService with ChangeNotifier {
       List<dynamic> data = json.decode(response.body);
       return data.map((vehicle) => vehicle as Map<String, dynamic>).toList();
     } else {
-      throw Exception('Error al obtener la lista de vehículos: ${response.statusCode} - ${response.body}');
+      throw Exception(
+          'Error al obtener la lista de vehículos: ${response.statusCode} - ${response.body}');
     }
   }
 
@@ -126,9 +130,38 @@ class ApiService with ChangeNotifier {
     print('Response body: ${response.body}');
 
     if (response.statusCode != 201 && response.statusCode != 200) {
-      throw Exception('Error al crear la reserva: ${response.statusCode} - ${response.body}');
+      throw Exception(
+          'Error al crear la reserva: ${response.statusCode} - ${response.body}');
     }
   }
 
+  Future<List<Map<String, dynamic>>> getBlogs() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/blog'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        if (auth != null) 'Authorization': 'Bearer $auth',
+      },
+    );
 
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      return data.map((blog) => blog as Map<String, dynamic>).toList();
+    } else {
+      throw Exception(
+          'Error al obtener la lista de vehículos: ${response.statusCode} - ${response.body}');
+    }
+  }
+
+  Future<void> postBlogs(Map<String, dynamic> blogData) async {
+    final response = await _postRequest('/blog', blogData);
+
+    print('Status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (response.statusCode != 201 && response.statusCode != 200) {
+      throw Exception(
+          'Error al publicar el blog: ${response.statusCode} - ${response.body}');
+    }
+  }
 }
