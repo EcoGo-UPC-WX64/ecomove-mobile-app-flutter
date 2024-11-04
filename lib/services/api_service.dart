@@ -1,4 +1,3 @@
-// Archivo: lib/services/api_service.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -6,11 +5,8 @@ import 'package:flutter/material.dart';
 class ApiService with ChangeNotifier {
   final String baseUrl = "https://ecomove-api.azurewebsites.net/api/v1";
 
-  int _userId = 3;
-  String _auth =
-      'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzExMjA0NjUsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYW1lcyIsImlhdCI6MTczMDUxNTY2NSwibmJmIjoxNzMwNTE1NjY1fQ.XUa0WogCOUqxmUNIBZLHQNqMU2gLRCbDW5Vea7iW3R0';
-
-  // Getter para el token de autenticación
+  String? _auth;
+  int? _userId;
   String? get auth => _auth;
   int? get userId => _userId;
 
@@ -23,16 +19,14 @@ class ApiService with ChangeNotifier {
       },
     );
   }
-
   // Método para realizar una solicitud POST con el token de autorización
-  Future<http.Response> _postRequest(
-      String endpoint, Map<String, dynamic> data) async {
+  Future<http.Response> _postRequest(String endpoint,
+      Map<String, dynamic> data) async {
     return await http.post(
       Uri.parse('$baseUrl$endpoint'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        if (_auth != null)
-          'Authorization': 'Bearer $_auth', // Token de autorización
+        'Authorization': 'Bearer $auth', // Token de autorización
       },
       body: jsonEncode(data),
     );
