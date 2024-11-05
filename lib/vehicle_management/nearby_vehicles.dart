@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import '../services/api_service.dart';
+import '../shared/custom_returnAppBar.dart';
 
 class NearbyVehicles extends StatefulWidget {
   const NearbyVehicles({super.key});
@@ -95,9 +96,7 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE6F4FB),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFE6F4FB),
-      ),
+      appBar: const CustomReturnAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
         child: Column(
