@@ -23,10 +23,11 @@ class ApiService with ChangeNotifier {
     return await http.get(
       Uri.parse('$baseUrl$endpoint'),
       headers: <String, String>{
-        'Authorization': 'Bearer $auth', // Token de autorización
+        'Authorization': 'Bearer $auth',
       },
     );
   }
+
   // Método para realizar una solicitud POST con el token de autorización
   Future<http.Response> _postRequest(String endpoint,
       Map<String, dynamic> data) async {
@@ -34,7 +35,7 @@ class ApiService with ChangeNotifier {
       Uri.parse('$baseUrl$endpoint'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $auth', // Token de autorización
+        'Authorization': 'Bearer $auth',
       },
       body: jsonEncode(data),
     );
@@ -50,14 +51,11 @@ class ApiService with ChangeNotifier {
       body: jsonEncode(loginData),
     );
 
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       final responseData = json.decode(response.body);
-      _auth = responseData['token']; // Guardar el token
-      _userId = responseData['userId']; // Guardar el ID del usuario
-      notifyListeners(); // Notificar a los widgets que el estado ha cambiado
+      _auth = responseData['token'];
+      _userId = responseData['userId'];
+      notifyListeners();
       return responseData;
     } else {
       throw Exception(
@@ -75,9 +73,6 @@ class ApiService with ChangeNotifier {
       body: jsonEncode(userData),
     );
 
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (response.statusCode == 201 || response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -94,9 +89,6 @@ class ApiService with ChangeNotifier {
 
     final response = await _getRequest('/eco-vehicles/userid/$userId');
 
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -105,7 +97,7 @@ class ApiService with ChangeNotifier {
     }
   }
 
-  //Metodo para obtener la lista de vehículos
+  // Método para obtener todos los vehículos
   Future<List<Map<String, dynamic>>> getVehicles() async {
     final response = await http.get(
       Uri.parse('$baseUrl/eco-vehicles'),
@@ -124,12 +116,27 @@ class ApiService with ChangeNotifier {
     }
   }
 
+  // Método para registrar un vehículo
+   // Método para registrar un vehículo
+  Future<void> registerVehicle(Map<String, dynamic> vehicleData, String? authToken) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/eco-vehicles'),
+      headers: {
+        'Content-Type': 'application/json',
+        if (authToken != null) 'Authorization': 'Bearer $authToken',
+      },
+      body: jsonEncode(vehicleData),
+    );
+
+    if (response.statusCode != 201 && response.statusCode != 200) {
+      throw Exception(
+          'Error al registrar el vehículo: ${response.statusCode} - ${response.body}');
+    }
+  }
+
   // Método para crear una reserva
   Future<void> createBooking(Map<String, dynamic> bookingData) async {
     final response = await _postRequest('/bookings', bookingData);
-
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
 
     if (response.statusCode != 201 && response.statusCode != 200) {
       throw Exception(
@@ -137,6 +144,7 @@ class ApiService with ChangeNotifier {
     }
   }
 
+  // Método para obtener blogs
   Future<List<Map<String, dynamic>>> getBlogs() async {
     final response = await http.get(
       Uri.parse('$baseUrl/blog'),
@@ -151,15 +159,13 @@ class ApiService with ChangeNotifier {
       return data.map((blog) => blog as Map<String, dynamic>).toList();
     } else {
       throw Exception(
-          'Error al obtener la lista de vehículos: ${response.statusCode} - ${response.body}');
+          'Error al obtener la lista de blogs: ${response.statusCode} - ${response.body}');
     }
   }
 
+  // Método para publicar un blog
   Future<void> postBlogs(Map<String, dynamic> blogData) async {
     final response = await _postRequest('/blog', blogData);
-
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
 
     if (response.statusCode != 201 && response.statusCode != 200) {
       throw Exception(
