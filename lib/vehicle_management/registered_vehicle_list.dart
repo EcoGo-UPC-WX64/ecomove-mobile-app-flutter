@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart'; // Asegúrate de importar tu ApiService
+import '../services/api_service.dart';
+import '../shared/custom_returnAppBar.dart'; // Asegúrate de importar tu ApiService
 
 class RegisteredVehicles extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
+      appBar: const CustomReturnAppBar(),
       body: FutureBuilder<List<dynamic>>(
         future: _vehiclesFuture,
         builder: (context, snapshot) {
