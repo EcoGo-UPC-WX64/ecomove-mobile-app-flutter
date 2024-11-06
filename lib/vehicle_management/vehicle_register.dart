@@ -20,7 +20,8 @@ class VehicleRegisterScreen extends StatelessWidget {
         "imageUrl": imageUrlController.text,
       };
 
-      await apiService.registerVehicle(vehicleData, null); // null es el authToken (reemplázalo si tienes uno)
+      await apiService.registerVehicle(
+          vehicleData); // null es el authToken (reemplázalo si tienes uno)
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Vehículo registrado exitosamente')),
       );
@@ -38,7 +39,8 @@ class VehicleRegisterScreen extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0), // Ajuste de ancho
+            padding:
+                const EdgeInsets.symmetric(horizontal: 32.0), // Ajuste de ancho
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -74,16 +76,27 @@ class VehicleRegisterScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      InputField(label: 'Nombre del vehículo', controller: nameController),
-                      InputField(label: 'Tipo de Vehículo', controller: typeController),
-                      InputField(label: 'Correo del propietario', controller: emailController),
-                      InputField(label: 'Indicaciones extras', controller: notesController),
-                      InputField(label: 'Subir Imagen del vehículo', controller: imageUrlController),
+                      InputField(
+                          label: 'Nombre del vehículo',
+                          controller: nameController),
+                      InputField(
+                          label: 'Tipo de Vehículo',
+                          controller: typeController),
+                      InputField(
+                          label: 'Correo del propietario',
+                          controller: emailController),
+                      InputField(
+                          label: 'Indicaciones extras',
+                          controller: notesController),
+                      InputField(
+                          label: 'Subir Imagen del vehículo',
+                          controller: imageUrlController),
                       SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () => registerVehicle(context),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF4F889E), // Color especificado del botón
+                          backgroundColor:
+                              Color(0xFF4F889E), // Color especificado del botón
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -131,15 +144,21 @@ class InputField extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10), // Bordes redondeados
-            borderSide: BorderSide(color: Color(0xFF4F889E), width: 1.5), // Borde de color especificado
+            borderSide: BorderSide(
+                color: Color(0xFF4F889E),
+                width: 1.5), // Borde de color especificado
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Color(0xFF4F889E), width: 1.5), // Borde cuando no está enfocado
+            borderSide: BorderSide(
+                color: Color(0xFF4F889E),
+                width: 1.5), // Borde cuando no está enfocado
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Color(0xFF4F889E), width: 1.5), // Borde cuando está enfocado
+            borderSide: BorderSide(
+                color: Color(0xFF4F889E),
+                width: 1.5), // Borde cuando está enfocado
           ),
           fillColor: Colors.transparent, // Sin color de fondo
           filled: true,

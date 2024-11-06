@@ -29,8 +29,8 @@ class ApiService with ChangeNotifier {
   }
 
   // Método para realizar una solicitud POST con el token de autorización
-  Future<http.Response> _postRequest(String endpoint,
-      Map<String, dynamic> data) async {
+  Future<http.Response> _postRequest(
+      String endpoint, Map<String, dynamic> data) async {
     return await http.post(
       Uri.parse('$baseUrl$endpoint'),
       headers: <String, String>{
@@ -117,8 +117,7 @@ class ApiService with ChangeNotifier {
   }
 
   // Método para registrar un vehículo
-   // Método para registrar un vehículo
-  Future<void> registerVehicle(Map<String, dynamic> vehicleData, String? authToken) async {
+  /*Future<void> registerVehicle(Map<String, dynamic> vehicleData, String? authToken) async {
     final response = await http.post(
       Uri.parse('$baseUrl/eco-vehicles'),
       headers: {
@@ -131,6 +130,25 @@ class ApiService with ChangeNotifier {
     if (response.statusCode != 201 && response.statusCode != 200) {
       throw Exception(
           'Error al registrar el vehículo: ${response.statusCode} - ${response.body}');
+    }
+  }*/
+
+  Future<void> registerVehicle(Map<String, dynamic> vehicleData) async {
+    final response = await _postRequest('/eco-vehicles', vehicleData);
+
+    if (response.statusCode != 201 && response.statusCode != 200) {
+      throw Exception(
+          'Error al registrar el vehículo: ${response.statusCode} - ${response.body}');
+    }
+  }
+
+  // Método para publicar un blog
+  Future<void> postBlogs(Map<String, dynamic> blogData) async {
+    final response = await _postRequest('/blog', blogData);
+
+    if (response.statusCode != 201 && response.statusCode != 200) {
+      throw Exception(
+          'Error al publicar el blog: ${response.statusCode} - ${response.body}');
     }
   }
 
@@ -160,16 +178,6 @@ class ApiService with ChangeNotifier {
     } else {
       throw Exception(
           'Error al obtener la lista de blogs: ${response.statusCode} - ${response.body}');
-    }
-  }
-
-  // Método para publicar un blog
-  Future<void> postBlogs(Map<String, dynamic> blogData) async {
-    final response = await _postRequest('/blog', blogData);
-
-    if (response.statusCode != 201 && response.statusCode != 200) {
-      throw Exception(
-          'Error al publicar el blog: ${response.statusCode} - ${response.body}');
     }
   }
 }
