@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../booking_reservation/reserva.dart';
 import '../customer_support/alerta_seguridad.dart';
 import '../customer_support/soporte.dart';
+import '../vehicle_management/vehicle_register.dart';
 import 'blog.dart';
 import 'achievements.dart';
 
@@ -81,7 +82,11 @@ class ProfilePage extends StatelessWidget {
                     iconPath: 'lib/assets/images/ic_add.png',
                     label: 'Registrar Vehículos',
                     onPressed: () {
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const ReservaPage()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VehicleRegisterScreen()),
+                      );
                     },
                   ),
                   _buildMenuButton(

@@ -4,24 +4,30 @@ import '../services/api_service.dart';
 class VehicleRegisterScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController typeController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController notesController = TextEditingController();
+  final TextEditingController batteryLevelController = TextEditingController();
+  final TextEditingController latitudeController = TextEditingController();
+  final TextEditingController longitudeController = TextEditingController();
+  final TextEditingController statusController = TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
+  final TextEditingController modelController = TextEditingController();
 
   final ApiService apiService = ApiService();
 
   void registerVehicle(BuildContext context) async {
     try {
       Map<String, dynamic> vehicleData = {
-        "ecoVehicleName": nameController.text,
+        "model": modelController.text,
         "ecoVehicleTypeId": int.tryParse(typeController.text) ?? 0,
-        "userEmail": emailController.text,
-        "notes": notesController.text,
+        "batteryLevel": int.tryParse(batteryLevelController.text) ?? 0,
+        "latitude": double.tryParse(latitudeController.text) ?? 0.0,
+        "longitude": double.tryParse(longitudeController.text) ?? 0.0,
+        "status": statusController.text,
         "imageUrl": imageUrlController.text,
+        "userId": apiService.userId,
+        "ecoVehicleName": nameController.text,
       };
 
-      await apiService.registerVehicle(
-          vehicleData); // null es el authToken (reemplázalo si tienes uno)
+      await apiService.registerVehicle(vehicleData);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Vehículo registrado exitosamente')),
       );
@@ -35,12 +41,11 @@ class VehicleRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50], // Fondo general claro
+      backgroundColor: Colors.lightBlue[50],
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32.0), // Ajuste de ancho
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -57,7 +62,7 @@ class VehicleRegisterScreen extends StatelessWidget {
                   'Ingresar los datos:',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black, // Color negro
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(height: 16),
@@ -80,23 +85,27 @@ class VehicleRegisterScreen extends StatelessWidget {
                           label: 'Nombre del vehículo',
                           controller: nameController),
                       InputField(
-                          label: 'Tipo de Vehículo',
+                          label: 'Modelo del vehículo',
+                          controller: modelController),
+                      InputField(
+                          label: 'Tipo de Vehículo (ID)',
                           controller: typeController),
                       InputField(
-                          label: 'Correo del propietario',
-                          controller: emailController),
+                          label: 'Nivel de batería (%)',
+                          controller: batteryLevelController),
                       InputField(
-                          label: 'Indicaciones extras',
-                          controller: notesController),
+                          label: 'Latitud', controller: latitudeController),
                       InputField(
-                          label: 'Subir Imagen del vehículo',
+                          label: 'Longitud', controller: longitudeController),
+                      InputField(label: 'Estado', controller: statusController),
+                      InputField(
+                          label: 'URL de Imagen del vehículo',
                           controller: imageUrlController),
                       SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () => registerVehicle(context),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Color(0xFF4F889E), // Color especificado del botón
+                          backgroundColor: Color(0xFF4F889E),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -109,7 +118,7 @@ class VehicleRegisterScreen extends StatelessWidget {
                           'Mandar Solicitud',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white, // Color del texto en blanco
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -143,24 +152,18 @@ class InputField extends StatelessWidget {
             color: Colors.black54,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10), // Bordes redondeados
-            borderSide: BorderSide(
-                color: Color(0xFF4F889E),
-                width: 1.5), // Borde de color especificado
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Color(0xFF4F889E), width: 1.5),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: Color(0xFF4F889E),
-                width: 1.5), // Borde cuando no está enfocado
+            borderSide: BorderSide(color: Color(0xFF4F889E), width: 1.5),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: Color(0xFF4F889E),
-                width: 1.5), // Borde cuando está enfocado
+            borderSide: BorderSide(color: Color(0xFF4F889E), width: 1.5),
           ),
-          fillColor: Colors.transparent, // Sin color de fondo
+          fillColor: Colors.transparent,
           filled: true,
           contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         ),
