@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
+import '../shared/custom_returnAppBar.dart';
+import '../user_management/profile.dart';
 
 class VehicleRegisterScreen extends StatefulWidget {
   @override
@@ -37,6 +39,10 @@ class _VehicleRegisterScreenState extends State<VehicleRegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Vehículo registrado exitosamente')),
       );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfilePage()),
+      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al registrar el vehículo: $e')),
@@ -47,6 +53,7 @@ class _VehicleRegisterScreenState extends State<VehicleRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomReturnAppBar(),
       backgroundColor: Colors.lightBlue[50],
       body: Center(
         child: SingleChildScrollView(
