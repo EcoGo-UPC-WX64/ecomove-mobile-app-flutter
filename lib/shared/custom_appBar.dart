@@ -71,7 +71,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        SuscripcionesPage()), // Navega a la nueva página
+                        SubscriptionsPage()), // Navega a la nueva página
               );
             },
           ),

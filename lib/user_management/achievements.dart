@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import '../shared/custom_returnAppBar.dart';
 import 'profile.dart';
 
-class MedallasPage extends StatelessWidget {
-  final List<Map<String,String>> medallas= List.generate(
-      5,
-      (index) => {
-        'titulo': 'Medalla $index',
-        'descripcion': 'Descripcion de la medalla $index',
-        'iconPath': 'lib/assets/images/ic_logros.png',
-      },
+class MedalsPage extends StatelessWidget {
+  final List<Map<String, String>> medallas = List.generate(
+    5,
+    (index) => {
+      'titulo': 'Medalla $index',
+      'descripcion': 'Descripcion de la medalla $index',
+      'iconPath': 'lib/assets/images/ic_logros.png',
+    },
   );
 
-  MedallasPage({super.key});
-
+  MedalsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +52,8 @@ class MedallasPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMedallaCard(String? titulo, String? descripcion, String? iconPath) {
+  Widget _buildMedallaCard(
+      String? titulo, String? descripcion, String? iconPath) {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -69,7 +69,8 @@ class MedallasPage extends StatelessWidget {
               backgroundImage: iconPath != null
                   ? AssetImage(iconPath)
                   : null, // Verificamos si la imagen no es null
-              backgroundColor: Colors.grey.shade200, // Color de fondo si no hay imagen
+              backgroundColor:
+                  Colors.grey.shade200, // Color de fondo si no hay imagen
             ),
             const SizedBox(width: 16),
             Column(
@@ -84,7 +85,8 @@ class MedallasPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  descripcion ?? 'Sin descripción', // Muestra "Sin descripción" si es null
+                  descripcion ??
+                      'Sin descripción', // Muestra "Sin descripción" si es null
                   style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -97,6 +99,4 @@ class MedallasPage extends StatelessWidget {
       ),
     );
   }
-
 }
-

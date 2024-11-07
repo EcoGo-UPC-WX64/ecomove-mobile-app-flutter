@@ -96,7 +96,7 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedallasPage()));
+                              builder: (context) => MedalsPage()));
                     },
                   ),
                   _buildMenuButton(

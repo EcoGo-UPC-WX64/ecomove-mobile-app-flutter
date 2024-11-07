@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../payment/payment_method.dart';
 import '../shared/custom_returnAppBar.dart';
 
-class SuscripcionesPage extends StatelessWidget {
+class SubscriptionsPage extends StatelessWidget {
   // Lista de suscripciones simulada
   final List<Map<String, String>> suscripciones = List.generate(
     3,
@@ -15,7 +15,7 @@ class SuscripcionesPage extends StatelessWidget {
     },
   );
 
-  SuscripcionesPage({super.key});
+  SubscriptionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
