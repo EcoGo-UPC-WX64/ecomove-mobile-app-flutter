@@ -127,7 +127,7 @@ class ProfilePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SoportePage()));
+                            builder: (context) => const SupportPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E),
@@ -140,7 +140,7 @@ class ProfilePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AlertaSeguridadPage()));
+                            builder: (context) => SecurityAlertPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E),

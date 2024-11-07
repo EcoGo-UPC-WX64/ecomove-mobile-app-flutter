@@ -1,8 +1,8 @@
 import 'package:ecomove_flutter_mobile/shared/custom_returnAppBar.dart';
 import 'package:flutter/material.dart';
 
-class SoportePage extends StatelessWidget {
-  const SoportePage({super.key});
+class SupportPage extends StatelessWidget {
+  const SupportPage({super.key});
 
   @override
   Widget build(BuildContext context) {
