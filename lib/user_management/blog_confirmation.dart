@@ -7,7 +7,7 @@ class BlogConfirmation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE3F2FD), // Fondo azul claro
+      backgroundColor: const Color(0xFFE3F2FD),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

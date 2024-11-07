@@ -3,7 +3,6 @@ import '../payment/payment_method.dart';
 import '../shared/custom_returnAppBar.dart';
 
 class SubscriptionsPage extends StatelessWidget {
-  // Lista de suscripciones simulada
   final List<Map<String, String>> suscripciones = List.generate(
     3,
     (index) => {
@@ -20,9 +19,9 @@ class SubscriptionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomReturnAppBar(), // AppBar personalizado
+      appBar: const CustomReturnAppBar(),
       body: Container(
-        color: const Color(0xFFE6F4FB), // Color de fondo
+        color: const Color(0xFFE6F4FB),
         padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +44,7 @@ class SubscriptionsPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final suscripcion = suscripciones[index];
                   return _buildSuscripcionCard(
-                    context, // Pasamos el contexto al widget de la tarjeta
+                    context,
                     suscripcion['titulo']!,
                     suscripcion['descripcion']!,
                     suscripcion['detalles']!,
@@ -60,7 +59,6 @@ class SubscriptionsPage extends StatelessWidget {
     );
   }
 
-  // Widget para construir la tarjeta de suscripción
   Widget _buildSuscripcionCard(
     BuildContext context,
     String titulo,
@@ -111,7 +109,6 @@ class SubscriptionsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.0),
-            // Botón de suscripción
             Center(
               child: ElevatedButton(
                 onPressed: () {

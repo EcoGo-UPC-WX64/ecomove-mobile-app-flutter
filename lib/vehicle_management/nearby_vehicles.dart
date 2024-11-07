@@ -14,21 +14,19 @@ class NearbyVehicles extends StatefulWidget {
 class _NearbyVehiclesState extends State<NearbyVehicles> {
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
-  final ApiService apiService = ApiService(); // Instancia de ApiService
-  LatLng? _currentLocation; // Almacena la ubicación actual
+  final ApiService apiService = ApiService();
+  LatLng? _currentLocation;
 
   @override
   void initState() {
     super.initState();
-    _determinePosition(); // Obtener la ubicación actual del usuario
-    _loadVehicleMarkers(); // Cargar marcadores de vehículos desde la API
+    _determinePosition();
+    _loadVehicleMarkers();
   }
 
-  // Método para obtener la ubicación actual del usuario
   Future<void> _determinePosition() async {
     Location location = Location();
 
-    // Solicitar permiso de ubicación si no está concedido
     bool serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
@@ -45,11 +43,9 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
       }
     }
 
-    // Obtener la ubicación actual
     final userLocation = await location.getLocation();
     _currentLocation = LatLng(userLocation.latitude!, userLocation.longitude!);
 
-    // Añadir marcador de ubicación actual
     _markers.add(
       Marker(
         markerId: const MarkerId('current_location'),
@@ -59,14 +55,13 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
       ),
     );
 
-    setState(() {}); // Actualizar el mapa
+    setState(() {});
   }
 
   Future<void> _loadVehicleMarkers() async {
     try {
-      final vehiculos = await apiService.getVehicles(); // Obtener vehículos desde la API
+      final vehiculos = await apiService.getVehicles();
 
-      // Crear un marcador para cada vehículo
       for (var vehiculo in vehiculos) {
         final marker = Marker(
           markerId: MarkerId(vehiculo['model']),
@@ -82,9 +77,8 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
         _markers.add(marker);
       }
 
-      setState(() {}); // Redibujar el mapa con los nuevos marcadores
+      setState(() {});
     } catch (e) {
-      // Manejo de errores
       print('Error al cargar vehículos: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al cargar vehículos cercanos')),

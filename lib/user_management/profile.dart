@@ -14,7 +14,6 @@ import '../providers/user_provider.dart';
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
-  // Definir un GlobalKey para controlar el Scaffold
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,13 +29,11 @@ class ProfilePage extends StatelessWidget {
       ),
       drawer: CustomAppBar.buildDrawer(context),
       body: Container(
-        color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
-        padding: const EdgeInsets.symmetric(
-            horizontal: 36.0, vertical: 64.0), // Espaciado
+        color: const Color(0xFFE6F4FB),
+        padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 64.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Mostrar el nombre del usuario
             Text(
               'Bienvenido, $username',
               style: const TextStyle(
@@ -45,14 +42,10 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            // Sección de cerrar sesión
             GestureDetector(
               onTap: () {
-                // Lógica para cerrar sesión
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Login())); // Volver al login
+                    context, MaterialPageRoute(builder: (context) => Login()));
               },
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +64,6 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 36),
-            // Grid de opciones
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -157,7 +149,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // Método para construir los botones del menú
   Widget _buildMenuButton({
     required String label,
     required VoidCallback? onPressed,

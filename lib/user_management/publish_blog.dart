@@ -33,7 +33,7 @@ class _BlogPostPageState extends State<BlogPostPage> {
     };
 
     try {
-      await apiService.postBlogs(blogData); // Publica el blog en la API
+      await apiService.postBlogs(blogData);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const BlogConfirmation()),
@@ -50,7 +50,7 @@ class _BlogPostPageState extends State<BlogPostPage> {
     return Scaffold(
       appBar: const CustomReturnAppBar(),
       body: Container(
-        color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
+        color: const Color(0xFFE6F4FB),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 64.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,7 @@ class _BlogPostPageState extends State<BlogPostPage> {
             const SizedBox(height: 8),
             TextFormField(
               controller: _descriptionController,
-              maxLines: 5, // Área de texto más grande para el contenido
+              maxLines: 5,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
@@ -104,7 +104,7 @@ class _BlogPostPageState extends State<BlogPostPage> {
             const SizedBox(height: 30),
             Center(
               child: ElevatedButton(
-                onPressed: _publishBlog, // Llama al método para publicar
+                onPressed: _publishBlog,
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 12),

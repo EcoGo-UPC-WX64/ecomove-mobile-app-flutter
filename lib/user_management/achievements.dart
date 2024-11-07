@@ -19,7 +19,7 @@ class MedalsPage extends StatelessWidget {
     return Scaffold(
       appBar: const CustomReturnAppBar(),
       body: Container(
-        color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
+        color: const Color(0xFFE6F4FB),
         padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 64.0),
         child: Column(
           children: [
@@ -66,18 +66,15 @@ class MedalsPage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundImage: iconPath != null
-                  ? AssetImage(iconPath)
-                  : null, // Verificamos si la imagen no es null
-              backgroundColor:
-                  Colors.grey.shade200, // Color de fondo si no hay imagen
+              backgroundImage: iconPath != null ? AssetImage(iconPath) : null,
+              backgroundColor: Colors.grey.shade200,
             ),
             const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  titulo ?? 'Sin título', // Muestra "Sin título" si es null
+                  titulo ?? 'Sin título',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -85,8 +82,7 @@ class MedalsPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  descripcion ??
-                      'Sin descripción', // Muestra "Sin descripción" si es null
+                  descripcion ?? 'Sin descripción',
                   style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,

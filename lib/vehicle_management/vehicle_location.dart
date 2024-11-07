@@ -15,11 +15,10 @@ class _VehicleLocationState extends State<VehicleLocation> {
   @override
   void initState() {
     super.initState();
-    _agregarMarcadoresSimulados(); // Agregar marcadores simulados
+    _agregarMarcadoresSimulados();
   }
 
   void _agregarMarcadoresSimulados() {
-    // Vehículos simulados con latitud y longitud
     final List<Map<String, dynamic>> vehiculos = [
       {'nombre': 'Scooter 1', 'lat': -12.0464, 'lng': -77.0428},
       {'nombre': 'Bicicleta 1', 'lat': -12.0453, 'lng': -77.0311},
@@ -40,18 +39,18 @@ class _VehicleLocationState extends State<VehicleLocation> {
       );
     }
 
-    setState(() {}); // Redibujar los marcadores
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE6F4FB), // Color de fondo
+      backgroundColor: const Color(0xFFE6F4FB),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE6F4FB), // Color de fondo de la barra
+        backgroundColor: const Color(0xFFE6F4FB),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24.0,horizontal: 32.0), // Espaciado general
+        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -62,10 +61,10 @@ class _VehicleLocationState extends State<VehicleLocation> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 10), // Espacio entre título y mapa
+            const SizedBox(height: 10),
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0), // Bordes redondeados
+                borderRadius: BorderRadius.circular(16.0),
                 child: GoogleMap(
                   initialCameraPosition: const CameraPosition(
                     target: LatLng(-12.0464, -77.0428),

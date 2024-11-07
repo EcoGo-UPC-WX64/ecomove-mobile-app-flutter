@@ -9,7 +9,7 @@ import 'available_vehicles.dart';
 class VehicleList extends StatelessWidget {
   VehicleList({super.key});
 
-  final ApiService apiService = ApiService(); // Instancia de ApiService
+  final ApiService apiService = ApiService();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,10 +44,9 @@ class VehicleList extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Carga los datos de los vehículos usando FutureBuilder
             Expanded(
               child: FutureBuilder<List<Map<String, dynamic>>>(
-                future: apiService.getVehicles(), // Llama al método de API
+                future: apiService.getVehicles(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -62,15 +61,14 @@ class VehicleList extends StatelessWidget {
                       itemCount: vehiculos.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Dos columnas
-                        crossAxisSpacing: 16.0, // Espacio horizontal
-                        mainAxisSpacing: 16.0, // Espacio vertical
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16.0,
+                        mainAxisSpacing: 16.0,
                       ),
                       itemBuilder: (context, index) {
                         final vehiculo = vehiculos[index];
                         return GestureDetector(
                           onTap: () {
-                            // Navegar a BookingPage y pasar el vehicleId
                             Navigator.push(
                               context,
                               MaterialPageRoute(

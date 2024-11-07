@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
-import '../shared/custom_returnAppBar.dart'; // Asegúrate de importar tu ApiService
+import '../shared/custom_returnAppBar.dart';
 
 class RegisteredVehicles extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class RegisteredVehicles extends StatefulWidget {
 
 class _RegisteredVehiclesState extends State<RegisteredVehicles> {
   late Future<List<dynamic>> _vehiclesFuture;
-  final ApiService apiService = ApiService(); // Crear instancia de ApiService
+  final ApiService apiService = ApiService();
 
   @override
   void initState() {
@@ -21,11 +21,11 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
   Future<List<dynamic>> fetchVehicles() async {
     print(apiService.userId);
     print(apiService.auth);
-    int? userId = apiService.userId; // Obtener el userId directamente del ApiService
+    int? userId = apiService.userId;
     if (userId == null) {
       throw Exception('User ID is not available.');
     }
-    return await apiService.getVehiclesByUserId(userId); // Usar el método del servicio
+    return await apiService.getVehiclesByUserId(userId);
   }
 
   @override
@@ -100,7 +100,7 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
                                   ),
                                 ),
                                 Text(
-                                  vehicle['model'] ?? '', // Mostrar el modelo del vehículo
+                                  vehicle['model'] ?? '',
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.black,
@@ -116,14 +116,13 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: ElevatedButton(
-                            onPressed: () {
-                              // Lógica para agregar un nuevo vehículo
-                            },
+                            onPressed: () {},
                             child: Text('Agregar nuevo vehículo'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.cyan[800],
                               foregroundColor: Colors.white,
-                              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 25),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
