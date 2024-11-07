@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../payment/metodo_pago.dart';
+import '../payment/payment_method.dart';
 import '../shared/custom_returnAppBar.dart';
 
 class SuscripcionesPage extends StatelessWidget {
