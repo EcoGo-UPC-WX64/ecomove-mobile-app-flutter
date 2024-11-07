@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
-import 'alquilar_vehiculo.dart';
+import 'rent_vehicle.dart';
 
 class ReservaPage extends StatefulWidget {
   final int vehicleId; // Recibe el vehicleId
