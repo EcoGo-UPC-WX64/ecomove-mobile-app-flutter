@@ -1,7 +1,7 @@
 import 'package:ecomove_flutter_mobile/auth/login.dart';
 import 'package:ecomove_flutter_mobile/shared/custom_appBar.dart';
 import 'package:flutter/material.dart';
-import '../booking_reservation/reserva.dart';
+import '../booking_reservation/booking.dart';
 import '../customer_support/alerta_seguridad.dart';
 import '../customer_support/soporte.dart';
 import '../vehicle_management/vehicle_register.dart';

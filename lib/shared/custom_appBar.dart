@@ -1,4 +1,4 @@
-import 'package:ecomove_flutter_mobile/booking_reservation/reserva.dart';
+import 'package:ecomove_flutter_mobile/booking_reservation/booking.dart';
 import 'package:ecomove_flutter_mobile/user_management/memberships.dart';
 import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:ecomove_flutter_mobile/vehicle_management/vehicle_list.dart';

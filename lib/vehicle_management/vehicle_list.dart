@@ -2,7 +2,7 @@ import 'package:ecomove_flutter_mobile/services/api_service.dart';
 import 'package:ecomove_flutter_mobile/vehicle_management/nearby_vehicles.dart';
 import 'package:flutter/material.dart';
 
-import '../booking_reservation/reserva.dart';
+import '../booking_reservation/booking.dart';
 import '../shared/custom_appBar.dart';
 import 'available_vehicles.dart';
 
