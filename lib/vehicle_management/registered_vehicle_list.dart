@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/vehicle_management/vehicle_register.dart';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import '../shared/custom_returnAppBar.dart';
@@ -116,7 +117,13 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => VehicleRegisterScreen()),
+                              );
+                            },
                             child: Text('Agregar nuevo vehículo'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.cyan[800],
