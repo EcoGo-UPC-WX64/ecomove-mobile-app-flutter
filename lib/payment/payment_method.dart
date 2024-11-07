@@ -1,7 +1,7 @@
 import 'package:ecomove_flutter_mobile/shared/custom_returnAppBar.dart';
 import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
-import 'registro_tarjeta.dart';
+import 'car_register.dart';
 
 class MetodoPagoPage extends StatelessWidget {
   @override
