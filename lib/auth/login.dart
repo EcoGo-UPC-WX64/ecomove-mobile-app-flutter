@@ -88,7 +88,7 @@ class _LoginState extends State<Login> {
                 TextField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    hintText: 'Nombres',
+                    hintText: 'Nombre de Usuario',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
