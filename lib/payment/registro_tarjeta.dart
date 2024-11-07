@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../shared/custom_returnAppBar.dart';
-import 'confirmacion_reserva.dart';
+import 'booking_confirmation.dart';
 
 class RegistroTarjetaPage extends StatelessWidget {
   @override
