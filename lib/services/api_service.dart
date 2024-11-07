@@ -115,6 +115,16 @@ class ApiService with ChangeNotifier {
           'Error al obtener la lista de vehículos: ${response.statusCode} - ${response.body}');
     }
   }
+  Future<Map<String,dynamic>> getVehicleById(int vehicleId) async{
+    final response = await _getRequest('/eco-vehicles/id/$vehicleId');
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception(
+          'Error al obtener el vehículo por id: ${response.statusCode} - ${response.body}');
+    }
+  }
 
   // Método para registrar un vehículo
   /*Future<void> registerVehicle(Map<String, dynamic> vehicleData, String? authToken) async {
