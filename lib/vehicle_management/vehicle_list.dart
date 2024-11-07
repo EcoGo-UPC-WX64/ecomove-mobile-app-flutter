@@ -60,7 +60,8 @@ class VehicleList extends StatelessWidget {
                     final vehiculos = snapshot.data!;
                     return GridView.builder(
                       itemCount: vehiculos.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, // Dos columnas
                         crossAxisSpacing: 16.0, // Espacio horizontal
                         mainAxisSpacing: 16.0, // Espacio vertical
@@ -69,17 +70,19 @@ class VehicleList extends StatelessWidget {
                         final vehiculo = vehiculos[index];
                         return GestureDetector(
                           onTap: () {
-                            // Navegar a ReservaPage y pasar el vehicleId
+                            // Navegar a BookingPage y pasar el vehicleId
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ReservaPage(vehicleId: vehiculo['id']),
+                                builder: (context) =>
+                                    BookingPage(vehicleId: vehiculo['id']),
                               ),
                             );
                           },
                           child: _buildVehiculoCard(
                             vehiculo['model'] ?? 'Vehículo',
-                            vehiculo['imageUrl'] ?? 'lib/assets/images/placeholder.png',
+                            vehiculo['imageUrl'] ??
+                                'lib/assets/images/placeholder.png',
                           ),
                         );
                       },

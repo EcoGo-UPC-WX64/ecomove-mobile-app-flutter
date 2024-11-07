@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../vehicle_management/vehicle_list.dart';
 
-class ConfirmacionPage extends StatelessWidget {
-  final String bookingCode; // Recibe el código de la reserva
+class ConfirmationPage extends StatelessWidget {
+  final String bookingCode;
 
-  const ConfirmacionPage({super.key, required this.bookingCode});
+  const ConfirmationPage({super.key, required this.bookingCode});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE3F2FD), // Fondo azul claro
+      backgroundColor: const Color(0xFFE3F2FD),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -59,13 +59,17 @@ class ConfirmacionPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Navegar de regreso a la página de inicio o reserva
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleList()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => VehicleList()));
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4F889E), // Color personalizado
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                  backgroundColor:
+                      const Color(0xFF4F889E), // Color personalizado
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                    borderRadius:
+                        BorderRadius.circular(30), // Bordes redondeados
                   ),
                 ),
                 child: const Text(

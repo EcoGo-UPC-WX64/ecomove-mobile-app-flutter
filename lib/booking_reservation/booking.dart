@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 import 'rent_vehicle.dart';
 
-class ReservaPage extends StatefulWidget {
+class BookingPage extends StatefulWidget {
   final int vehicleId; // Recibe el vehicleId
 
-  const ReservaPage({super.key, required this.vehicleId});
+  const BookingPage({super.key, required this.vehicleId});
 
   @override
-  _ReservaPageState createState() => _ReservaPageState();
+  _BookingPageState createState() => _BookingPageState();
 }
 
-class _ReservaPageState extends State<ReservaPage> {
+class _BookingPageState extends State<BookingPage> {
   DateTime? _fechaInicio;
   DateTime? _fechaFin;
   final TextEditingController _distritoController = TextEditingController();
@@ -38,9 +38,13 @@ class _ReservaPageState extends State<ReservaPage> {
 
   // Función para crear la reserva
   void _crearReserva() async {
-    if (_fechaInicio == null || _fechaFin == null || _distritoController.text.isEmpty) {
+    if (_fechaInicio == null ||
+        _fechaFin == null ||
+        _distritoController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, selecciona las fechas de inicio y fin y el distrito')),
+        const SnackBar(
+            content: Text(
+                'Por favor, selecciona las fechas de inicio y fin y el distrito')),
       );
       return;
     }
@@ -48,8 +52,10 @@ class _ReservaPageState extends State<ReservaPage> {
     try {
       // Crear el objeto para enviar a la API
       Map<String, dynamic> reservaData = {
-        'userId': apiService.userId, // ID del usuario que obtenemos de ApiService
-        'vehicleId': widget.vehicleId, // Aquí puedes poner el ID del vehículo correspondiente
+        'userId':
+            apiService.userId, // ID del usuario que obtenemos de ApiService
+        'vehicleId': widget
+            .vehicleId, // Aquí puedes poner el ID del vehículo correspondiente
         'startTime': _fechaInicio?.toIso8601String(),
         'endTime': _fechaFin?.toIso8601String(),
         'status': "Activo",
@@ -65,7 +71,6 @@ class _ReservaPageState extends State<ReservaPage> {
 
       // Regresar o actualizar la interfaz según lo necesites
       Navigator.pop(context);
-
     } catch (e) {
       print('Error al crear la reserva: $e');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -118,21 +123,27 @@ class _ReservaPageState extends State<ReservaPage> {
                       decoration: InputDecoration(
                         labelText: 'Fecha inicio',
                         labelStyle: const TextStyle(color: Colors.black),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 12.0),
                       ),
                       onTap: () => _selectDate(context, true),
                       controller: TextEditingController(
-                        text: _fechaInicio != null ? "${_fechaInicio!.month}/${_fechaInicio!.day}/${_fechaInicio!.year}" : '',
+                        text: _fechaInicio != null
+                            ? "${_fechaInicio!.month}/${_fechaInicio!.day}/${_fechaInicio!.year}"
+                            : '',
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -143,21 +154,27 @@ class _ReservaPageState extends State<ReservaPage> {
                       decoration: InputDecoration(
                         labelText: 'Fecha fin',
                         labelStyle: const TextStyle(color: Colors.black),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         suffixIcon: const Icon(Icons.calendar_today),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 12.0),
                       ),
                       onTap: () => _selectDate(context, false),
                       controller: TextEditingController(
-                        text: _fechaFin != null ? "${_fechaFin!.month}/${_fechaFin!.day}/${_fechaFin!.year}" : '',
+                        text: _fechaFin != null
+                            ? "${_fechaFin!.month}/${_fechaFin!.day}/${_fechaFin!.year}"
+                            : '',
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -168,16 +185,20 @@ class _ReservaPageState extends State<ReservaPage> {
                       decoration: InputDecoration(
                         labelText: 'Distrito',
                         labelStyle: const TextStyle(color: Colors.black),
-                        floatingLabelStyle: const TextStyle(color: Colors.black),
+                        floatingLabelStyle:
+                            const TextStyle(color: Colors.black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: customColor, width: 2),
+                          borderSide:
+                              const BorderSide(color: customColor, width: 2),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 12.0),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -193,7 +214,8 @@ class _ReservaPageState extends State<ReservaPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const AlquilarVehiculoPage(), // Cambia `NearbyVehicles` por la página que deseas mostrar
+                              builder: (context) =>
+                                  const RentVehiclePage(), // Cambia `NearbyVehicles` por la página que deseas mostrar
                             ),
                           );
                         },

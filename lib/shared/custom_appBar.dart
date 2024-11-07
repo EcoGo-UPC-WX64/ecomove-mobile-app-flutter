@@ -22,13 +22,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           onMenuPressed();
         },
-
       ),
       actions: [
         IconButton(
           icon: const Icon(Icons.account_circle, color: Colors.white),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
           },
         ),
       ],
@@ -69,7 +69,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pop(context); // Cierra el Drawer antes de navegar
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SuscripcionesPage()), // Navega a la nueva página
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SuscripcionesPage()), // Navega a la nueva página
               );
             },
           ),
@@ -80,7 +82,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => VehicleList()), // Navega a la nueva página
+                MaterialPageRoute(
+                    builder: (context) =>
+                        VehicleList()), // Navega a la nueva página
               );
             },
           ),
@@ -92,7 +96,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pop(context); // Acción para "Reservar"
               /*Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ReservaPage()), // Navega a la nueva página
+                MaterialPageRoute(builder: (context) => const BookingPage()), // Navega a la nueva página
               );*/
             },
           ),
@@ -111,7 +115,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   // Helper para construir cada ítem del Drawer
   static Widget _buildDrawerItem(BuildContext context,
-      {required IconData icon, required String text, required VoidCallback onTap}) {
+      {required IconData icon,
+      required String text,
+      required VoidCallback onTap}) {
     return ListTile(
       leading: Icon(icon),
       title: Text(text),

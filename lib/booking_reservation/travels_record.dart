@@ -3,14 +3,14 @@ import '../services/api_service.dart';
 
 import '../shared/custom_returnAppBar.dart'; // Importa Provider si estÃ¡s usando un provider para el userId
 
-class HistorialViajesPage extends StatefulWidget {
-  const HistorialViajesPage({super.key});
+class TravelsRecordPage extends StatefulWidget {
+  const TravelsRecordPage({super.key});
 
   @override
-  _HistorialViajesPageState createState() => _HistorialViajesPageState();
+  _TravelsRecordPageState createState() => _TravelsRecordPageState();
 }
 
-class _HistorialViajesPageState extends State<HistorialViajesPage> {
+class _TravelsRecordPageState extends State<TravelsRecordPage> {
   ApiService apiService = ApiService();
   List<dynamic> viajes = [];
   bool isLoading = true;
@@ -63,38 +63,38 @@ class _HistorialViajesPageState extends State<HistorialViajesPage> {
             isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
-              child: ListView.builder(
-                itemCount: viajes.length,
-                itemBuilder: (context, index) {
-                  final viaje = viajes[index];
-                  final startTime = DateTime.parse(viaje['startTime']);
-                  final endTime = DateTime.parse(viaje['endTime']);
+                    child: ListView.builder(
+                      itemCount: viajes.length,
+                      itemBuilder: (context, index) {
+                        final viaje = viajes[index];
+                        final startTime = DateTime.parse(viaje['startTime']);
+                        final endTime = DateTime.parse(viaje['endTime']);
 
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: const BorderSide(color: Colors.black12),
-                      ),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: const Color(0xFF607D8B),
-                          child: const Text(
-                            'A',
-                            style: TextStyle(color: Colors.white),
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: const BorderSide(color: Colors.black12),
+                            ),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: const Color(0xFF607D8B),
+                                child: const Text(
+                                  'A',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              title: Text(
+                                  'Fecha de Inicio: ${startTime.day}/${startTime.month}/${startTime.year}'),
+                              subtitle: Text(
+                                  'Fecha de Fin: ${endTime.day}/${endTime.month}/${endTime.year}'),
+                            ),
                           ),
-                        ),
-                        title: Text(
-                            'Fecha de Inicio: ${startTime.day}/${startTime.month}/${startTime.year}'),
-                        subtitle: Text(
-                            'Fecha de Fin: ${endTime.day}/${endTime.month}/${endTime.year}'),
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
           ],
         ),
       ),

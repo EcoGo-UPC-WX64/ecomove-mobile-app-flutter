@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart'; // Importa el servicio API
 
-class AlquilarVehiculoPage extends StatefulWidget {
-  const AlquilarVehiculoPage({super.key});
+class RentVehiclePage extends StatefulWidget {
+  const RentVehiclePage({super.key});
 
   @override
-  _AlquilarVehiculoPageState createState() => _AlquilarVehiculoPageState();
+  _RentVehiclePageState createState() => _RentVehiclePageState();
 }
 
-class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
+class _RentVehiclePageState extends State<RentVehiclePage> {
   String _codigo = "47273";
   ApiService apiService = ApiService(); // Instancia del servicio API
 
@@ -25,7 +25,8 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
       Map<String, dynamic> bookingData = {
         'vehicle': _codigo, // Suponiendo que 'vehicle' es el código generado
       };
-      await apiService.createBooking(bookingData); // Llamada a la API para crear la reserva
+      await apiService
+          .createBooking(bookingData); // Llamada a la API para crear la reserva
 
       // Pasar el código generado como argumento
       Navigator.pushNamed(
@@ -62,10 +63,11 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 40),
-                
+
                 // Contenedor del código
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -88,10 +90,13 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
                 ElevatedButton(
                   onPressed: _regenerarCodigo,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4F889E), // Color personalizado
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                    backgroundColor:
+                        const Color(0xFF4F889E), // Color personalizado
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 30),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                      borderRadius:
+                          BorderRadius.circular(30), // Bordes redondeados
                     ),
                   ),
                   child: const Text(
@@ -103,15 +108,19 @@ class _AlquilarVehiculoPageState extends State<AlquilarVehiculoPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Botón para confirmar la reserva y continuar
                 ElevatedButton(
-                  onPressed: _confirmarReserva, // Llama a la función que confirma la reserva
+                  onPressed:
+                      _confirmarReserva, // Llama a la función que confirma la reserva
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4F889E), // Color personalizado
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                    backgroundColor:
+                        const Color(0xFF4F889E), // Color personalizado
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 30),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                      borderRadius:
+                          BorderRadius.circular(30), // Bordes redondeados
                     ),
                   ),
                   child: const Text(
