@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart'; // Importa el servicio API
+import '../services/api_service.dart';
+
+import '../shared/custom_returnAppBar.dart'; // Importa Provider si estÃ¡s usando un provider para el userId
 
 class HistorialViajesPage extends StatefulWidget {
   const HistorialViajesPage({super.key});
@@ -9,28 +11,28 @@ class HistorialViajesPage extends StatefulWidget {
 }
 
 class _HistorialViajesPageState extends State<HistorialViajesPage> {
-  ApiService apiService = ApiService(); // Instancia del servicio API
-  List<dynamic> viajes = []; // Lista para almacenar los viajes obtenidos
-  bool isLoading = true; // Estado de carga
+  ApiService apiService = ApiService();
+  List<dynamic> viajes = [];
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    fetchHistorialViajes(); // Llamar a la API cuando el widget se inicialice
+    fetchHistorialViajes();
   }
 
-  // Función para obtener el historial de viajes desde la API
   void fetchHistorialViajes() async {
     try {
-      //final data = await apiService.getAllBookings(); // Llamada a la API
+      final userId = apiService.userId;
+      final data = await apiService.getBookingsByUserId(userId!);
       setState(() {
-        //viajes = data;
-        isLoading = false; // Cambia el estado cuando los datos sean recibidos
+        viajes = data;
+        isLoading = false;
       });
     } catch (e) {
       print('Error fetching bookings: $e');
       setState(() {
-        isLoading = false; // Detener el estado de carga si hay un error
+        isLoading = false;
       });
     }
   }
@@ -38,14 +40,14 @@ class _HistorialViajesPageState extends State<HistorialViajesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE3F2FD), // Fondo azul claro
+      backgroundColor: const Color(0xFFE3F2FD),
+      appBar: const CustomReturnAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Título
-            const SizedBox(height: 120),
+            const SizedBox(height: 80),
             const Text(
               'HISTORIAL DE VIAJES',
               style: TextStyle(
@@ -61,32 +63,38 @@ class _HistorialViajesPageState extends State<HistorialViajesPage> {
             isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
-                    child: ListView.builder(
-                      itemCount: viajes.length, // Número de elementos en la lista
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: const BorderSide(color: Colors.black12),
-                            ),
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: const Color(0xFF607D8B),
-                                child: const Text(
-                                  'A',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              title: const Text('Fecha de Uso'),
-                              subtitle: Text(viajes[index]['date']), // Asegúrate de usar el campo correcto para la fecha
-                            ),
+              child: ListView.builder(
+                itemCount: viajes.length,
+                itemBuilder: (context, index) {
+                  final viaje = viajes[index];
+                  final startTime = DateTime.parse(viaje['startTime']);
+                  final endTime = DateTime.parse(viaje['endTime']);
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(color: Colors.black12),
+                      ),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: const Color(0xFF607D8B),
+                          child: const Text(
+                            'A',
+                            style: TextStyle(color: Colors.white),
                           ),
-                        );
-                      },
+                        ),
+                        title: Text(
+                            'Fecha de Inicio: ${startTime.day}/${startTime.month}/${startTime.year}'),
+                        subtitle: Text(
+                            'Fecha de Fin: ${endTime.day}/${endTime.month}/${endTime.year}'),
+                      ),
                     ),
-                  ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
