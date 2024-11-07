@@ -1,4 +1,3 @@
-import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 import '../vehicle_management/vehicle_list.dart';
 import 'register.dart';
