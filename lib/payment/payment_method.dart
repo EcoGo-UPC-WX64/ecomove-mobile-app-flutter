@@ -3,7 +3,7 @@ import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 import 'car_register.dart';
 
-class MetodoPagoPage extends StatelessWidget {
+class PaymentMethodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +24,7 @@ class MetodoPagoPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => RegistroTarjetaPage()),
+                  MaterialPageRoute(builder: (context) => CardRegisterPage()),
                 );
               },
               icon: const Icon(

@@ -6,11 +6,11 @@ class SuscripcionesPage extends StatelessWidget {
   // Lista de suscripciones simulada
   final List<Map<String, String>> suscripciones = List.generate(
     3,
-        (index) => {
+    (index) => {
       'titulo': 'Membresía Premium',
       'descripcion': 'Tarifa mensual con beneficios adicionales.',
       'detalles':
-      '• Acceso ilimitado a viajes.\n• Tiempo extendido por viaje.\n• Prioridad en zonas con alta demanda.',
+          '• Acceso ilimitado a viajes.\n• Tiempo extendido por viaje.\n• Prioridad en zonas con alta demanda.',
       'precio': 'S/39.90',
     },
   );
@@ -62,12 +62,12 @@ class SuscripcionesPage extends StatelessWidget {
 
   // Widget para construir la tarjeta de suscripción
   Widget _buildSuscripcionCard(
-      BuildContext context,
-      String titulo,
-      String descripcion,
-      String detalles,
-      String precio,
-      ) {
+    BuildContext context,
+    String titulo,
+    String descripcion,
+    String detalles,
+    String precio,
+  ) {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -118,7 +118,7 @@ class SuscripcionesPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MetodoPagoPage(),
+                      builder: (context) => PaymentMethodPage(),
                     ),
                   );
                 },

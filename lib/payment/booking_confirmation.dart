@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../user_management/profile.dart';
 
-class ConfirmacionPagoPage extends StatelessWidget {
-  const ConfirmacionPagoPage({super.key});
+class ConfirmationPaymentPage extends StatelessWidget {
+  const ConfirmationPaymentPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../shared/custom_returnAppBar.dart';
 import 'booking_confirmation.dart';
 
-class RegistroTarjetaPage extends StatelessWidget {
+class CardRegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,10 +73,12 @@ class RegistroTarjetaPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ConfirmacionPagoPage()),
+                          builder: (context) =>
+                              const ConfirmationPaymentPage()),
                     );
                   },
-                  child: const Text('Pagar', style: TextStyle(color: Colors.white)),
+                  child: const Text('Pagar',
+                      style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF55889D),
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
