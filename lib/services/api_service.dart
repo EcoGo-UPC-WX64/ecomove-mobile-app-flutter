@@ -180,4 +180,17 @@ class ApiService with ChangeNotifier {
           'Error al obtener la lista de blogs: ${response.statusCode} - ${response.body}');
     }
   }
+  // Método para obtener reservas por ID de usuario
+  Future<List<Map<String, dynamic>>> getBookingsByUserId(int userId) async {
+    final response = await _getRequest('/bookings/user-id/$userId');
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      return data.map((booking) => booking as Map<String, dynamic>).toList();
+    } else {
+      throw Exception('Error al obtener las reservas por usuario: ${response.statusCode} - ${response.body}');
+    }
+  }
+
 }
+
