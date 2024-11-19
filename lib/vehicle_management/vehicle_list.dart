@@ -2,14 +2,14 @@ import 'package:ecomove_flutter_mobile/services/api_service.dart';
 import 'package:ecomove_flutter_mobile/vehicle_management/nearby_vehicles.dart';
 import 'package:flutter/material.dart';
 
-import '../booking_reservation/booking.dart';
+import '../booking_reservation/reserva.dart';
 import '../shared/custom_appBar.dart';
 import 'available_vehicles.dart';
 
 class VehicleList extends StatelessWidget {
   VehicleList({super.key});
 
-  final ApiService apiService = ApiService();
+  final ApiService apiService = ApiService(); // Instancia de ApiService
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,9 +44,10 @@ class VehicleList extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            // Carga los datos de los vehículos usando FutureBuilder
             Expanded(
               child: FutureBuilder<List<Map<String, dynamic>>>(
-                future: apiService.getVehicles(),
+                future: apiService.getVehicles(), // Llama al método de API
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -59,28 +60,26 @@ class VehicleList extends StatelessWidget {
                     final vehiculos = snapshot.data!;
                     return GridView.builder(
                       itemCount: vehiculos.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Dos columnas
+                        crossAxisSpacing: 16.0, // Espacio horizontal
+                        mainAxisSpacing: 16.0, // Espacio vertical
                       ),
                       itemBuilder: (context, index) {
                         final vehiculo = vehiculos[index];
                         return GestureDetector(
                           onTap: () {
+                            // Navegar a ReservaPage y pasar el vehicleId
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    BookingPage(vehicleId: vehiculo['id']),
+                                builder: (context) => ReservaPage(vehicleId: vehiculo['id'], imageUrl: vehiculo['imageUrl'], name: vehiculo['model']),
                               ),
                             );
                           },
                           child: _buildVehiculoCard(
                             vehiculo['model'] ?? 'Vehículo',
-                            vehiculo['imageUrl'] ??
-                                'lib/assets/images/placeholder.png',
+                            vehiculo['imageUrl'] ?? '',
                           ),
                         );
                       },
@@ -140,30 +139,39 @@ class VehicleList extends StatelessWidget {
       ),
       elevation: 5,
       child: SizedBox(
-        height: 100, // Ajusta la altura aquí
+        height: 150, // Ajusta la altura aquí
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              imageUrl,
-              height: 100,
-              width: 100,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'lib/assets/images/placeholder.png', // Imagen de reemplazo
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                );
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.network(
+                imageUrl,
+                height: 80,
+                width: 80,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'lib/assets/images/placeholder.png', // Imagen de reemplazo
+                    height: 80,
+                    width: 80,
+                    fit: BoxFit.contain,
+                  );
+                },
+              ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              nombre,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                nombre,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis, // Esto asegurará que el texto no se desborde
+                maxLines: 1, // Limita el texto a una línea
               ),
             ),
           ],
