@@ -6,7 +6,7 @@ import 'package:ecomove_flutter_mobile/services/api_service.dart';
 class BlogPage extends StatelessWidget {
   BlogPage({super.key});
 
-  final ApiService apiService = ApiService();
+  final ApiService apiService = ApiService(); // Instancia de ApiService
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -105,7 +105,9 @@ class BlogPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Acción del botón "Ver blog"
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4F889E),
                       foregroundColor: Colors.white,

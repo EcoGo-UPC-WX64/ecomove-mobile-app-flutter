@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
-import '../payment/payment_method.dart';
+import '../payment/metodo_pago.dart';
 import '../shared/custom_returnAppBar.dart';
 
-class SubscriptionsPage extends StatelessWidget {
-  final List<Map<String, String>> suscripciones = List.generate(
-    3,
-    (index) => {
+class SuscripcionesPage extends StatelessWidget {
+  // Lista de suscripciones con tres tipos diferentes
+  final List<Map<String, String>> suscripciones = [
+    {
+      'titulo': 'Membresía Básica',
+      'descripcion': 'Suscripción mensual con acceso limitado.',
+      'detalles': '• Acceso a 10 viajes al mes.\n• Tiempo limitado por viaje.\n• Acceso en zonas regulares.',
+      'precio': 'S/19.90',
+    },
+    {
+      'titulo': 'Membresía Estándar',
+      'descripcion': 'Suscripción mensual con beneficios adicionales.',
+      'detalles': '• Acceso a 20 viajes al mes.\n• Tiempo extendido por viaje.\n• Acceso en zonas regulares y de alta demanda.',
+      'precio': 'S/29.90',
+    },
+    {
       'titulo': 'Membresía Premium',
-      'descripcion': 'Tarifa mensual con beneficios adicionales.',
-      'detalles':
-          '• Acceso ilimitado a viajes.\n• Tiempo extendido por viaje.\n• Prioridad en zonas con alta demanda.',
+      'descripcion': 'Suscripción mensual con todos los beneficios.',
+      'detalles': '• Acceso ilimitado a viajes.\n• Tiempo extendido por viaje.\n• Prioridad en zonas de alta demanda.',
       'precio': 'S/39.90',
     },
-  );
+  ];
 
-  SubscriptionsPage({super.key});
+  SuscripcionesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomReturnAppBar(),
+      appBar: const CustomReturnAppBar(), // AppBar personalizado
       body: Container(
-        color: const Color(0xFFE6F4FB),
+        color: const Color(0xFFE6F4FB), // Color de fondo
         padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,13 +70,14 @@ class SubscriptionsPage extends StatelessWidget {
     );
   }
 
+  // Widget para construir la tarjeta de suscripción
   Widget _buildSuscripcionCard(
-    BuildContext context,
-    String titulo,
-    String descripcion,
-    String detalles,
-    String precio,
-  ) {
+      BuildContext context,
+      String titulo,
+      String descripcion,
+      String detalles,
+      String precio,
+      ) {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -115,7 +127,7 @@ class SubscriptionsPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentMethodPage(),
+                      builder: (context) => MetodoPagoPage(),
                     ),
                   );
                 },

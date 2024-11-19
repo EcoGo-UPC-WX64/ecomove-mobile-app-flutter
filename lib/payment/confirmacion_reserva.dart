@@ -1,8 +1,9 @@
-import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 
-class BlogConfirmation extends StatelessWidget {
-  const BlogConfirmation({super.key});
+import '../user_management/profile.dart';
+
+class ConfirmacionPagoPage extends StatelessWidget {
+  const ConfirmacionPagoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,9 @@ class BlogConfirmation extends StatelessWidget {
               Container(
                 width: 200,
                 height: 200,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF67A5BE),
+                  color: const Color(0xFF67A5BE),
                 ),
                 child: const Icon(
                   Icons.check_circle,
@@ -31,7 +32,7 @@ class BlogConfirmation extends StatelessWidget {
 
               // Texto de confirmación
               const Text(
-                'Tu publicación se ha subido correctamente',
+                'Tu pago se ha realizado con éxito',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,

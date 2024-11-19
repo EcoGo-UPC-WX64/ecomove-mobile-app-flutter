@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../shared/custom_returnAppBar.dart';
 
-class SecurityAlertPage extends StatelessWidget {
+class AlertaSeguridadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

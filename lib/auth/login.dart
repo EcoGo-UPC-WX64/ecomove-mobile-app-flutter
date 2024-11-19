@@ -1,3 +1,4 @@
+import 'package:ecomove_flutter_mobile/user_management/profile.dart';
 import 'package:flutter/material.dart';
 import '../vehicle_management/vehicle_list.dart';
 import 'register.dart';
@@ -87,7 +88,7 @@ class _LoginState extends State<Login> {
                 TextField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    hintText: 'Nombre de Usuario',
+                    hintText: 'Nombres',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
