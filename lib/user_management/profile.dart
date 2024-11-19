@@ -1,7 +1,8 @@
 import 'package:ecomove_flutter_mobile/auth/login.dart';
 import 'package:ecomove_flutter_mobile/shared/custom_appBar.dart';
 import 'package:flutter/material.dart';
-import '../booking_reservation/booking.dart';
+import '../booking_reservation/historial_viajes.dart';
+import '../booking_reservation/reserva.dart';
 import '../customer_support/alerta_seguridad.dart';
 import '../customer_support/soporte.dart';
 import '../vehicle_management/vehicle_register.dart';
@@ -14,6 +15,7 @@ import '../providers/user_provider.dart';
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
+  // Definir un GlobalKey para controlar el Scaffold
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,11 +31,13 @@ class ProfilePage extends StatelessWidget {
       ),
       drawer: CustomAppBar.buildDrawer(context),
       body: Container(
-        color: const Color(0xFFE6F4FB),
-        padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 64.0),
+        color: const Color(0xFFE6F4FB), // Color de fondo del cuerpo
+        padding: const EdgeInsets.symmetric(
+            horizontal: 36.0, vertical: 64.0), // Espaciado
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Mostrar el nombre del usuario
             Text(
               'Bienvenido, $username',
               style: const TextStyle(
@@ -42,28 +46,8 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
-              },
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.logout, color: Colors.black),
-                  SizedBox(width: 8.0),
-                  Text(
-                    'Cerrar sesión',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 36),
+            // Grid de opciones
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -72,7 +56,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   _buildMenuButton(
                     iconPath: 'lib/assets/images/ic_add.png',
-                    label: 'Registrar Vehículos',
+                    label: 'Registrar\nVehículos',
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -88,14 +72,17 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MedalsPage()));
+                              builder: (context) => MedallasPage()));
                     },
                   ),
                   _buildMenuButton(
                     iconPath: 'lib/assets/images/ic_historial.png',
                     label: 'Historial',
                     onPressed: () {
-                      // Navegar a Historial
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HistorialViajesPage()));
                     },
                   ),
                   _buildMenuButton(
@@ -109,7 +96,6 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
             // Botones de soporte y alertas
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -119,7 +105,7 @@ class ProfilePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SupportPage()));
+                            builder: (context) => const SoportePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E),
@@ -132,13 +118,32 @@ class ProfilePage extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SecurityAlertPage()));
+                            builder: (context) => AlertaSeguridadPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4F889E),
                     foregroundColor: Colors.white,
                   ),
                   child: const Text('Alertas'),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Lógica para cerrar sesión
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Login())); // Volver al login
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4F889E),
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Cerrar Sesión'),
                 ),
               ],
             ),
@@ -149,6 +154,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  // Método para construir los botones del menú
   Widget _buildMenuButton({
     required String label,
     required VoidCallback? onPressed,
@@ -182,6 +188,7 @@ class ProfilePage extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
+
               ),
             ),
           ],

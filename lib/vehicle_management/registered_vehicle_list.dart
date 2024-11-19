@@ -1,7 +1,7 @@
 import 'package:ecomove_flutter_mobile/vehicle_management/vehicle_register.dart';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
-import '../shared/custom_returnAppBar.dart';
+import '../shared/custom_returnAppBar.dart'; // Asegúrate de importar tu ApiService
 
 class RegisteredVehicles extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class RegisteredVehicles extends StatefulWidget {
 
 class _RegisteredVehiclesState extends State<RegisteredVehicles> {
   late Future<List<dynamic>> _vehiclesFuture;
-  final ApiService apiService = ApiService();
+  final ApiService apiService = ApiService(); // Crear instancia de ApiService
 
   @override
   void initState() {
@@ -22,11 +22,11 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
   Future<List<dynamic>> fetchVehicles() async {
     print(apiService.userId);
     print(apiService.auth);
-    int? userId = apiService.userId;
+    int? userId = apiService.userId; // Obtener el userId directamente del ApiService
     if (userId == null) {
       throw Exception('User ID is not available.');
     }
-    return await apiService.getVehiclesByUserId(userId);
+    return await apiService.getVehiclesByUserId(userId); // Usar el método del servicio
   }
 
   @override
@@ -76,6 +76,23 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+
+                                Center(
+                                  child: Image.network(
+                                    vehicle['imageUrl'],
+                                    height: 200,
+                                    width: 200,
+                                    fit: BoxFit.contain,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'lib/assets/images/placeholder.png', // Imagen de reemplazo
+                                        height: 80,
+                                        width: 80,
+                                        fit: BoxFit.contain,
+                                      );
+                                    },
+                                  ),
+                                ),
                                 SizedBox(height: 20),
                                 Text(
                                   'Nombre:',
@@ -101,7 +118,7 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
                                   ),
                                 ),
                                 Text(
-                                  vehicle['model'] ?? '',
+                                  vehicle['model'] ?? '', // Mostrar el modelo del vehículo
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.black,
@@ -121,15 +138,15 @@ class _RegisteredVehiclesState extends State<RegisteredVehicles> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => VehicleRegisterScreen()),
+                                  builder: (context) => VehicleRegisterScreen(),
+                                ),
                               );
                             },
                             child: Text('Agregar nuevo vehículo'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.cyan[800],
                               foregroundColor: Colors.white,
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 25),
+                              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
