@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import '../booking_reservation/reserva.dart';
 import '../services/api_service.dart';
 import '../shared/custom_returnAppBar.dart';
 
@@ -14,19 +15,21 @@ class NearbyVehicles extends StatefulWidget {
 class _NearbyVehiclesState extends State<NearbyVehicles> {
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
-  final ApiService apiService = ApiService();
-  LatLng? _currentLocation;
+  final ApiService apiService = ApiService(); // Instancia de ApiService
+  LatLng? _currentLocation; // Almacena la ubicación actual
 
   @override
   void initState() {
     super.initState();
-    _determinePosition();
-    _loadVehicleMarkers();
+    _determinePosition(); // Obtener la ubicación actual del usuario
+    _loadVehicleMarkers(); // Cargar marcadores de vehículos desde la API
   }
 
+  // Método para obtener la ubicación actual del usuario
   Future<void> _determinePosition() async {
     Location location = Location();
 
+    // Solicitar permiso de ubicación si no está concedido
     bool serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
@@ -43,9 +46,11 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
       }
     }
 
+    // Obtener la ubicación actual
     final userLocation = await location.getLocation();
     _currentLocation = LatLng(userLocation.latitude!, userLocation.longitude!);
 
+    // Añadir marcador de ubicación actual
     _markers.add(
       Marker(
         markerId: const MarkerId('current_location'),
@@ -55,13 +60,14 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
       ),
     );
 
-    setState(() {});
+    setState(() {}); // Actualizar el mapa
   }
 
   Future<void> _loadVehicleMarkers() async {
     try {
-      final vehiculos = await apiService.getVehicles();
+      final vehiculos = await apiService.getVehicles(); // Obtener vehículos desde la API
 
+      // Crear un marcador para cada vehículo
       for (var vehiculo in vehiculos) {
         final marker = Marker(
           markerId: MarkerId(vehiculo['model']),
@@ -72,17 +78,26 @@ class _NearbyVehiclesState extends State<NearbyVehicles> {
           infoWindow: InfoWindow(
             title: vehiculo['model'],
             snippet: 'Nivel de batería: ${vehiculo['batteryLevel']}%',
+            onTap:(){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ReservaPage(vehicleId: vehiculo['id'],imageUrl: vehiculo['imageUrl'],name: vehiculo['model']),
+                ),
+              );
+            }
           ),
         );
         _markers.add(marker);
       }
 
-      setState(() {});
+      setState(() {}); // Redibujar el mapa con los nuevos marcadores
     } catch (e) {
+      // Manejo de errores
       print('Error al cargar vehículos: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
+      /*ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al cargar vehículos cercanos')),
-      );
+      );*/
     }
   }
 
